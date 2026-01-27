@@ -1,43 +1,34 @@
 import { motion } from 'framer-motion';
-import { 
-  Home, 
-  Clock, 
-  BadgeCheck, 
-  Wallet,
-  HeartHandshake,
-  Shield
-} from 'lucide-react';
+import { Home, Clock, Shield, IndianRupee } from 'lucide-react';
 
 const features = [
   {
     icon: Home,
     title: 'Home Collection',
-    description: 'Our trained phlebotomists visit your home for sample collection at your preferred time.',
+    description: 'Convenient sample collection at your doorstep',
+    color: '#2196F3',
+    bgColor: 'rgba(33, 150, 243, 0.1)',
   },
   {
     icon: Clock,
     title: 'Quick Results',
-    description: 'Get accurate test results within 24-48 hours, directly on your phone or email.',
-  },
-  {
-    icon: BadgeCheck,
-    title: 'NABL Accredited',
-    description: 'All our partner labs are NABL certified, ensuring the highest quality standards.',
-  },
-  {
-    icon: Wallet,
-    title: 'Affordable Pricing',
-    description: 'Transparent pricing with no hidden charges. We offer the best rates in the industry.',
-  },
-  {
-    icon: HeartHandshake,
-    title: 'Caring Staff',
-    description: 'Our healthcare professionals are trained to provide compassionate and gentle care.',
+    description: 'Fast turnaround time for all tests',
+    color: '#4CAF50',
+    bgColor: 'rgba(76, 175, 80, 0.1)',
   },
   {
     icon: Shield,
-    title: 'Safe & Hygienic',
-    description: 'We follow strict safety protocols with disposable equipment for every patient.',
+    title: 'Accurate Results',
+    description: 'State-of-the-art equipment and certified lab',
+    color: '#FFC107',
+    bgColor: 'rgba(255, 193, 7, 0.1)',
+  },
+  {
+    icon: IndianRupee,
+    title: 'Affordable Rates',
+    description: 'Competitive pricing with quality assurance',
+    color: '#00BCD4',
+    bgColor: 'rgba(0, 188, 212, 0.1)',
   },
 ];
 
@@ -46,28 +37,27 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.15,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5 },
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
   },
 };
 
 export const WhyChooseSection = () => {
   return (
-    <section className="section-padding bg-gradient-to-b from-white to-secondary/30 relative overflow-hidden">
-      {/* Decorative Elements */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 right-10 w-72 h-72 bg-accent/5 rounded-full blur-3xl" />
-
-      <div className="container-custom relative z-10">
+    <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+      <div className="container-custom">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -76,15 +66,11 @@ export const WhyChooseSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-4">
-            Why Choose Us
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Healthcare Made{' '}
-            <span className="text-gradient">Simple & Trustworthy</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Why Choose Medikites?
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            We combine medical excellence with convenience to provide you with the best healthcare experience.
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Your trusted partner for accurate diagnostic testing
           </p>
         </motion.div>
 
@@ -93,35 +79,49 @@ export const WhyChooseSection = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
               variants={itemVariants}
+              whileHover={{ y: -8, transition: { duration: 0.3 } }}
               className="group"
             >
-              <div className="relative p-8 rounded-3xl bg-white/80 backdrop-blur-sm border border-white/50 shadow-soft hover:shadow-elevated transition-all duration-300 h-full">
-                {/* Number Badge */}
-                <div className="absolute -top-3 -right-3 w-8 h-8 rounded-full gradient-primary flex items-center justify-center text-white text-sm font-bold shadow-soft">
-                  {index + 1}
-                </div>
-
-                {/* Icon */}
+              <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 h-full flex flex-col items-center text-center">
+                {/* Icon Circle */}
                 <motion.div
-                  whileHover={{ rotate: [0, -10, 10, 0] }}
-                  transition={{ duration: 0.5 }}
-                  className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-6"
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ duration: 0.3 }}
+                  className="w-20 h-20 rounded-full flex items-center justify-center mb-6 relative"
+                  style={{ backgroundColor: feature.color }}
                 >
-                  <feature.icon className="w-8 h-8 text-primary" />
+                  <feature.icon className="w-10 h-10 text-white" strokeWidth={2} />
+                  
+                  {/* Pulse effect on hover */}
+                  <motion.div
+                    className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100"
+                    style={{ backgroundColor: feature.color }}
+                    animate={{
+                      scale: [1, 1.2, 1],
+                      opacity: [0.5, 0, 0],
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeOut",
+                    }}
+                  />
                 </motion.div>
 
-                {/* Content */}
-                <h3 className="text-xl font-semibold text-foreground mb-3">
+                {/* Title */}
+                <h3 className="text-xl font-bold text-gray-900 mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
+
+                {/* Description */}
+                <p className="text-gray-600 leading-relaxed">
                   {feature.description}
                 </p>
               </div>
