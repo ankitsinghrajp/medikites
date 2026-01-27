@@ -8,9 +8,8 @@ import {
   Twitter, 
   Instagram, 
   Linkedin,
-  ArrowRight
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+
 import logo from "../assets/icon-logo-Photoroom.png";
 
 const footerLinks = {
