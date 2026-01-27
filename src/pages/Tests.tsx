@@ -4,6 +4,7 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Search, Filter, ArrowRight, Heart, Droplet, Activity, Pill } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import TestCatalogueHero from '@/components/TestCatalogue/TestCatalogueHero';
 
 const categories = [
   { id: 'all', label: 'All Tests', count: 120 },
@@ -54,45 +55,7 @@ const Tests = () => {
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="pt-32 pb-12 gradient-hero relative overflow-hidden">
-          <div className="container-custom relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="max-w-3xl mx-auto text-center mb-8"
-            >
-              <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
-                Test <span className="text-gradient">Catalogue</span>
-              </h1>
-              <p className="text-lg text-muted-foreground">
-                Browse our comprehensive range of diagnostic tests with home sample collection.
-              </p>
-            </motion.div>
-
-            {/* Search Bar */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="max-w-xl mx-auto"
-            >
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                <input
-                  type="text"
-                  placeholder="Search for tests..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 rounded-2xl border border-border bg-white/80 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary shadow-soft"
-                />
-                <button className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-xl bg-secondary hover:bg-secondary/80 transition-colors">
-                  <Filter className="w-5 h-5 text-muted-foreground" />
-                </button>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
+        <TestCatalogueHero/>
         {/* Toggle & Categories */}
         <section className="py-8 bg-white border-b border-border/50">
           <div className="container-custom">

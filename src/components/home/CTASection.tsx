@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 
 export const CTASection = () => {
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="py-20 max-w-6xl rounded-xl mb-14 mx-auto relative overflow-hidden">
       {/* Gradient Background */}
       <div className="absolute inset-0 gradient-primary" />
       
