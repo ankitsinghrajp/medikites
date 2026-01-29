@@ -5,34 +5,27 @@ import {
   Mail, 
   MapPin, 
   Facebook, 
-  Twitter, 
+  MessageCircle, 
   Instagram, 
-  Linkedin,
+  PhoneCall ,
 } from 'lucide-react';
 
 import logo from "../assets/icon-logo-Photoroom.png";
 
 const footerLinks = {
-
   company: [
-    { name: 'About Us', path: '/about' },
-    { name: 'Our Team', path: '/about' },
-    { name: 'Careers', path: '/contact' },
-    { name: 'Contact', path: '/contact' },
-  ],
-  support: [
-    { name: 'Book a Test', path: '/tests' },
+    { name: 'Home', path: '/' },
+    { name: 'About us', path: '/about' },
     { name: 'Test Catalogue', path: '/tests' },
-    { name: 'Health Packages', path: '/tests' },
-    { name: 'FAQs', path: '/contact' },
+    { name: 'Contact us', path: '/contact' },
   ],
 };
 
 const socialLinks = [
-  { icon: Facebook, href: '#', label: 'Facebook' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
+  { icon: Facebook, href: 'https://www.facebook.com/MediKites', label: 'Facebook' },
+  { icon: MessageCircle, href: 'https://wa.me/916200837385', label: 'MessageCircle' },
+  { icon: Instagram, href: 'https://www.instagram.com/medikites', label: 'Instagram' },
+  { icon: PhoneCall , href: 'tel:+91 62008 37385', label: 'PhoneCall' },
 ];
 
 export const Footer = () => {
@@ -44,85 +37,72 @@ export const Footer = () => {
       }}
     >
       {/* Main Footer */}
-      <div className="container-custom py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+      <div className="container-custom py-12 md:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Brand Column */}
-          <div className="lg:col-span-2">
-            <Link to="/" className="flex items-center gap-2 mb-6">
+          <div className="lg:col-span-6">
+            <Link to="/" className="inline-block mb-6">
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.2 }}
-                className="flex items-center gap-2"
               >
-                <img className='w-52' src={logo} alt="logo-medikites" />
+                <img className='w-48 md:w-52' src={logo} alt="Medikites Logo" />
               </motion.div>
             </Link>
-            <p className="text-gray-700 mb-6 max-w-sm leading-relaxed">
+            <p className="text-gray-700 mb-8 max-w-md leading-relaxed text-sm md:text-base">
               Hospital-quality healthcare delivered to your doorstep. Trusted by thousands of families across the nation.
             </p>
-            <div className="space-y-3">
+            <div className="space-y-4">
               <motion.a 
                 href="tel:+916200837385" 
                 whileHover={{ x: 5 }}
-                className="flex items-center gap-3 text-gray-700 hover:text-gray-900 transition-all duration-200"
+                className="flex items-center gap-3 text-gray-700 hover:text-gray-900 transition-all duration-200 group"
               >
-                <div className="w-10 h-10 rounded-lg bg-white/40 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-lg bg-white/50 flex items-center justify-center group-hover:bg-white/70 transition-colors">
                   <Phone className="w-5 h-5" />
                 </div>
-                <span className="font-medium">+91 620 083 7385</span>
+                <span className="font-medium text-sm md:text-base">+91 620 083 7385</span>
               </motion.a>
               <motion.a 
-                href="mailto:care@medikites.com" 
+                href="mailto:info.medikites@gmail.com" 
                 whileHover={{ x: 5 }}
-                className="flex items-center gap-3 text-gray-700 hover:text-gray-900 transition-all duration-200"
+                className="flex items-center gap-3 text-gray-700 hover:text-gray-900 transition-all duration-200 group"
               >
-                <div className="w-10 h-10 rounded-lg bg-white/40 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-lg bg-white/50 flex items-center justify-center group-hover:bg-white/70 transition-colors">
                   <Mail className="w-5 h-5" />
                 </div>
-                <span className="font-medium">care@medikites.com</span>
+                <span className="font-medium text-sm md:text-base">info.medikites@gmail.com</span>
               </motion.a>
               <motion.div 
                 whileHover={{ x: 5 }}
-                className="flex items-start gap-3 text-gray-700"
+                className="flex items-start gap-3 text-gray-700 group"
               >
-                <div className="w-10 h-10 rounded-lg bg-white/40 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-lg bg-white/50 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-white/70 transition-colors">
                   <MapPin className="w-5 h-5" />
                 </div>
-                <span className="font-medium">123 Healthcare Avenue, Medical District, City - 110001</span>
+                <span className="font-medium text-sm md:text-base leading-relaxed">
+                  No 88-250-5AC-922, HRBR 1st Block, Kalyan Nagar, Bengaluru, Karnataka, 560043
+                </span>
               </motion.div>
             </div>
           </div>
 
-        <div></div>
+          {/* Spacer for large screens */}
+          <div className="hidden lg:block lg:col-span-3"></div>
 
-          {/* Company */}
-          <div>
-            <h4 className="font-bold text-gray-900 mb-5 text-lg">Company</h4>
+          {/* Company Links */}
+          <div className="lg:col-span-3">
+            <h4 className="font-bold text-gray-900 mb-6 text-lg md:text-xl">Company</h4>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
                   <Link
                     to={link.path}
-                    className="text-gray-700 hover:text-gray-900 transition-colors duration-200 inline-flex items-center gap-2 group"
+                    className="text-gray-700 hover:text-gray-900 transition-colors duration-200 inline-flex items-center gap-2 group text-sm md:text-base"
                   >
-                    <span className="group-hover:translate-x-1 transition-transform duration-200">{link.name}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Support */}
-          <div>
-            <h4 className="font-bold text-gray-900 mb-5 text-lg">Support</h4>
-            <ul className="space-y-3">
-              {footerLinks.support.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.path}
-                    className="text-gray-700 hover:text-gray-900 transition-colors duration-200 inline-flex items-center gap-2 group"
-                  >
-                    <span className="group-hover:translate-x-1 transition-transform duration-200">{link.name}</span>
+                    <span className="group-hover:translate-x-1 transition-transform duration-200">
+                      {link.name}
+                    </span>
                   </Link>
                 </li>
               ))}
@@ -135,8 +115,8 @@ export const Footer = () => {
       <div className="border-t border-white/30" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>
         <div className="container-custom py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-gray-700 text-center md:text-left font-medium">
-              © 2024 Medikites Healthcare Services. All rights reserved.
+            <p className="text-xs md:text-sm text-gray-700 text-center md:text-left font-medium">
+              © {new Date().getFullYear()} Medikites Healthcare Services. All rights reserved.
             </p>
             <div className="flex items-center gap-3">
               {socialLinks.map((social) => (

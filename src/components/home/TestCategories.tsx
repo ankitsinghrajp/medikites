@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Activity, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import BloodTest from "../../assets/test-images/blood-test-image.jpg";
 import DiabetesTest from "../../assets/test-images/diabetes-test-image.jpg";
 import HeartTest from "../../assets/test-images/heart-test-image.jpg";
@@ -17,6 +18,7 @@ const testCategories = [
     description: 'Complete blood analysis',
     color: 'from-red-500 to-pink-500',
     delay: 0.1,
+    categoryId: 'Blood Test', // Match with your categories data
   },
   {
     image: DiabetesTest,
@@ -24,6 +26,7 @@ const testCategories = [
     description: 'Blood sugar monitoring',
     color: 'from-blue-500 to-cyan-500',
     delay: 0.2,
+    categoryId: 'Diabetes Test',
   },
   {
     image: HeartTest,
@@ -31,6 +34,7 @@ const testCategories = [
     description: 'Cardiac health screening',
     color: 'from-rose-500 to-red-500',
     delay: 0.3,
+    categoryId: 'Heart Test',
   },
   {
     image: KidneyTest,
@@ -38,6 +42,7 @@ const testCategories = [
     description: 'Renal function analysis',
     color: 'from-emerald-500 to-teal-500',
     delay: 0.4,
+    categoryId: 'Kidney Test',
   },
   {
     image: LiverTest,
@@ -45,6 +50,7 @@ const testCategories = [
     description: 'Hepatic function panel',
     color: 'from-amber-500 to-orange-500',
     delay: 0.5,
+    categoryId: 'Liver Test',
   },
   {
     image: ThyroidTest,
@@ -52,6 +58,7 @@ const testCategories = [
     description: 'Hormone level testing',
     color: 'from-purple-500 to-indigo-500',
     delay: 0.6,
+    categoryId: 'Thyroid Test',
   },
   {
     image: UrineTest,
@@ -59,6 +66,7 @@ const testCategories = [
     description: 'Urinalysis & screening',
     color: 'from-yellow-500 to-amber-500',
     delay: 0.7,
+    categoryId: 'Urine Test',
   },
   {
     image: VitaminTest,
@@ -66,6 +74,7 @@ const testCategories = [
     description: 'Nutritional assessment',
     color: 'from-green-500 to-emerald-500',
     delay: 0.8,
+    categoryId: 'Vitamin Test',
   },
   {
     image: WomensTest,
@@ -73,6 +82,7 @@ const testCategories = [
     description: "Specialized women's test",
     color: 'from-pink-500 to-rose-500',
     delay: 0.9,
+    categoryId: "Women's Health Test",
   },
 ];
 
@@ -99,6 +109,19 @@ const cardVariants = {
 };
 
 export const TestCategoriesSection = () => {
+  const navigate = useNavigate();
+
+  // Handle category card click
+  const handleCategoryClick = (categoryId) => {
+    // Navigate to tests page with category filter as URL parameter
+    navigate(`/tests?category=${encodeURIComponent(categoryId)}`);
+  };
+
+  // Handle View All Tests button click
+  const handleViewAllTests = () => {
+    navigate('/tests');
+  };
+
   return (
     <section className="relative py-14 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
       {/* Background Decorative Elements */}
@@ -162,6 +185,7 @@ export const TestCategoriesSection = () => {
               key={category.title}
               variants={cardVariants}
               whileHover={{ y: -12, transition: { duration: 0.3 } }}
+              onClick={() => handleCategoryClick(category.categoryId)}
               className="group relative cursor-pointer"
             >
               {/* Card */}
@@ -216,7 +240,7 @@ export const TestCategoriesSection = () => {
                     className="flex items-center gap-2 text-sm font-semibold group/link"
                   >
                     <span className={`text-transparent bg-clip-text bg-gradient-to-r ${category.color} group-hover:from-cyan-600 group-hover:to-emerald-600 transition-all duration-300`}>
-                      Learn More
+                      View Tests
                     </span>
                     <motion.div
                       animate={{ x: [0, 4, 0] }}
@@ -275,15 +299,15 @@ export const TestCategoriesSection = () => {
           <p className="text-gray-600 mb-6 text-lg">
             Can't find what you're looking for?
           </p>
-          <motion.a
-            href="#contact"
+          <motion.button
+            onClick={handleViewAllTests}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
           >
             <Activity className="w-5 h-5" />
             <span>View All Tests</span>
-          </motion.a>
+          </motion.button>
         </motion.div>
       </div>
     </section>

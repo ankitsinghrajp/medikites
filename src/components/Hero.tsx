@@ -28,14 +28,6 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, [backgroundData.length]);
 
-  const handleWhatsApp = () => {
-    window.open('https://wa.me/919630009838?text=Hello%20Painter%20Babu,%20I%20would%20like%20to%20get%20a%20quote%20for%20painting%20services.', '_blank');
-  };
-
-  const handleConsultation = () => {
-    window.open('https://wa.me/919630009838?text=Hello%20Painter%20Babu,%20I%20would%20like%20to%20schedule%20a%20free%20consultation%20for%20my%20painting%20project.', '_blank');
-  };
-
   return (
     <div className=" bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Top Image Section */}
