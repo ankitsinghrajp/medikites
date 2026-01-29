@@ -8,7 +8,7 @@ export const CTASection = () => {
 
   return (
     <>
-      <section className="relative py-24 overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900">
+      <section className="relative py-24 max-w-6xl mx-auto mb-14 rounded-md md:rounded-2xl overflow-hidden bg-gradient-to-br from-blue-100 via-blue-500 to-blue-100">
         {/* Gradient Background */}
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/50 to-purple-600/50" />
         
