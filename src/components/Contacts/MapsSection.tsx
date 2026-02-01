@@ -47,11 +47,11 @@ const MapSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-start max-w-7xl mx-auto">
           {/* Map Container */}
           <div className="relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-teal-400 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-300" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 to-blue-500 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-300" />
             
             <div className="relative bg-white rounded-3xl overflow-hidden shadow-2xl">
               {/* Map Header */}
-              <div className="bg-gradient-to-r from-cyan-500 to-teal-500 text-white py-5 px-6 flex items-center justify-between">
+              <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-5 px-6 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                     <MapPin className="w-6 h-6" />
@@ -89,7 +89,7 @@ const MapSection = () => {
                 {/* Location Info Overlay */}
                 <div className="absolute top-6 left-6 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl p-5 max-w-[300px] border border-gray-100">
                   <div className="flex items-start gap-3 mb-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-teal-400 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl flex items-center justify-center flex-shrink-0">
                       <MapPin className="w-5 h-5 text-white" />
                     </div>
                     <div>
@@ -115,10 +115,10 @@ const MapSection = () => {
           <div className="space-y-6">
             {/* Address Card */}
             <div className="group relative">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-teal-400 rounded-2xl opacity-0 group-hover:opacity-100 blur transition duration-300" />
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-400 to-blue-500 rounded-2xl opacity-0 group-hover:opacity-100 blur transition duration-300" />
               <div className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all border border-gray-100">
                 <div className="flex items-start gap-6">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-400 to-teal-400 flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center flex-shrink-0 shadow-lg">
                     <MapPin className="w-8 h-8 text-white" />
                   </div>
                   <div className="flex-1">

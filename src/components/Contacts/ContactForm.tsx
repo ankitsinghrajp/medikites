@@ -151,11 +151,11 @@ const ContactForm = () => {
           {/* Form Card with glass effect */}
           <div className={`group relative transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             {/* Gradient blur effect on hover - matching MapSection */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-teal-400 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-300" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 to-blue-500 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-300" />
             
             <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden">
               {/* Form Header */}
-              <div className="bg-gradient-to-r from-cyan-500 to-teal-500 text-white py-6 px-8">
+              <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-6 px-8">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                     <MessageSquare className="w-7 h-7" />
@@ -173,10 +173,10 @@ const ContactForm = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Name Field */}
                   <div className={`group/field relative transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
-                    <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-2xl opacity-0 group-hover/field:opacity-100 blur transition duration-300" />
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-400 to-blue-400 rounded-2xl opacity-0 group-hover/field:opacity-100 blur transition duration-300" />
                     <div className="relative bg-gray-50 rounded-2xl p-5 border border-gray-100">
                       <label htmlFor="name" className="flex items-center gap-2 text-sm font-bold text-gray-700 mb-3">
-                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-400 to-cyan-400 flex items-center justify-center">
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-400 to-blue-400 flex items-center justify-center">
                           <User className="w-4 h-4 text-white" />
                         </div>
                         Name *
@@ -337,41 +337,41 @@ const ContactForm = () => {
                   </div>
                 </div>
 
-                {/* Submit Button */}
-                <div className={`flex justify-center pt-4 transition-all duration-700 delay-800 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full sm:w-auto px-12 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-bold text-lg transition-all flex items-center justify-center gap-3 shadow-lg hover:shadow-2xl disabled:opacity-70 disabled:cursor-not-allowed min-w-[240px]"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <svg className="animate-spin h-6 w-6" viewBox="0 0 24 24">
-                          <circle
-                            className="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                            fill="none"
-                          />
-                          <path
-                            className="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                          />
-                        </svg>
-                        <span className="animate-pulse">Sending...</span>
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-6 h-6" />
-                        Send Message
-                      </>
-                    )}
-                  </button>
-                </div>
+               {/* Submit Button */}
+<div className={`flex justify-center pt-4 transition-all duration-700 delay-800 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+  <button
+    type="submit"
+    disabled={isSubmitting}
+    className="w-full sm:w-auto px-12 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-500 hover:to-blue-600 text-white font-bold text-lg transition-all flex items-center justify-center gap-3 shadow-lg hover:shadow-2xl disabled:opacity-70 disabled:cursor-not-allowed min-w-[240px]"
+  >
+    {isSubmitting ? (
+      <>
+        <svg className="animate-spin h-6 w-6" viewBox="0 0 24 24">
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+            fill="none"
+          />
+          <path
+            className="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          />
+        </svg>
+        <span className="animate-pulse">Sending...</span>
+      </>
+    ) : (
+      <>
+        <Send className="w-6 h-6" />
+        Send Message
+      </>
+    )}
+  </button>
+</div>
 
                 {/* Success/Error Messages */}
                 {submitStatus === 'success' && (

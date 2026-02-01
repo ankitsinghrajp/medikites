@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X, Calendar, Clock, MapPin, User, Phone, Mail, FileText, Sparkles } from 'lucide-react';
+import { X, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const BookTestModal = ({ isOpen, onClose }) => {
@@ -17,8 +17,8 @@ const BookTestModal = ({ isOpen, onClose }) => {
   const [errors, setErrors] = useState({});
 
   const serviceTypes = [
-  "Home Collection",
-  "Lab Visit"
+    "Home Collection",
+    "Lab Visit"
   ];
 
   const timeSlots = [
@@ -142,42 +142,43 @@ const BookTestModal = ({ isOpen, onClose }) => {
     <AnimatePresence>
       {isOpen && (
         <>
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center">
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={onClose}
-              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             />
 
-            {/* Modal */}
+            {/* Modal - Mobile First (slides up from bottom on mobile, centered on desktop) */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.3 }}
-              className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white rounded-3xl shadow-2xl custom-scrollbar"
+              initial={{ opacity: 0, y: '100%' }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="relative w-full sm:w-[95%] sm:max-w-2xl max-h-[95vh] sm:max-h-[90vh] overflow-hidden bg-white sm:rounded-3xl rounded-t-3xl shadow-2xl flex flex-col"
             >
-              {/* Header */}
-              <div className="sticky top-0 bg-gradient-to-r from-cyan-500 to-teal-500 text-white px-6 py-5 rounded-t-3xl flex items-center justify-between z-10">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
-                    <Sparkles className="w-6 h-6" />
+              {/* Header - Sticky with gradient background from hero section */}
+              <div className="sticky top-0 bg-gradient-to-br from-[#1e3a5f] via-[#2d5a7b] to-[#1a4d6d] text-white px-4 sm:px-6 py-4 sm:py-5 sm:rounded-t-3xl rounded-t-3xl flex items-center justify-between z-10 shadow-md">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                    <Sparkles className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
-                  <h2 className="text-2xl font-bold">Book Test</h2>
+                  <h2 className="text-xl sm:text-2xl font-bold">Book Test</h2>
                 </div>
                 <button
                   onClick={handleCancel}
                   className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+                  aria-label="Close modal"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
               </div>
 
-              {/* Form */}
-              <form onSubmit={handleSubmit} className="p-6 space-y-5">
+              {/* Form - Scrollable */}
+              <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 sm:py-6 space-y-4 sm:space-y-5 custom-scrollbar">
                 {/* Service Type */}
                 <div>
                   <label htmlFor="serviceType" className="block text-sm font-semibold text-gray-700 mb-2">
@@ -188,10 +189,10 @@ const BookTestModal = ({ isOpen, onClose }) => {
                     name="serviceType"
                     value={formData.serviceType}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
+                    className={`w-full px-3 sm:px-4 py-3 text-base bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
                       errors.serviceType
                         ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                        : 'border-gray-200 focus:border-cyan-500 focus:ring-cyan-200'
+                        : 'border-gray-300 focus:border-[#2d5a7b] focus:ring-cyan-200'
                     }`}
                   >
                     <option value="">Select Service Type</option>
@@ -202,7 +203,7 @@ const BookTestModal = ({ isOpen, onClose }) => {
                     ))}
                   </select>
                   {errors.serviceType && (
-                    <p className="mt-1 text-sm text-red-600">{errors.serviceType}</p>
+                    <p className="mt-1.5 text-sm text-red-600">{errors.serviceType}</p>
                   )}
                 </div>
 
@@ -217,15 +218,15 @@ const BookTestModal = ({ isOpen, onClose }) => {
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
+                    className={`w-full px-3 sm:px-4 py-3 text-base bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
                       errors.fullName
                         ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                        : 'border-gray-200 focus:border-cyan-500 focus:ring-cyan-200'
+                        : 'border-gray-300 focus:border-[#2d5a7b] focus:ring-cyan-200'
                     }`}
                     placeholder="Enter your full name"
                   />
                   {errors.fullName && (
-                    <p className="mt-1 text-sm text-red-600">{errors.fullName}</p>
+                    <p className="mt-1.5 text-sm text-red-600">{errors.fullName}</p>
                   )}
                 </div>
 
@@ -240,22 +241,22 @@ const BookTestModal = ({ isOpen, onClose }) => {
                     name="mobileNumber"
                     value={formData.mobileNumber}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
+                    className={`w-full px-3 sm:px-4 py-3 text-base bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
                       errors.mobileNumber
                         ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                        : 'border-gray-200 focus:border-cyan-500 focus:ring-cyan-200'
+                        : 'border-gray-300 focus:border-[#2d5a7b] focus:ring-cyan-200'
                     }`}
                     placeholder="Enter your mobile number"
                   />
                   {errors.mobileNumber && (
-                    <p className="mt-1 text-sm text-red-600">{errors.mobileNumber}</p>
+                    <p className="mt-1.5 text-sm text-red-600">{errors.mobileNumber}</p>
                   )}
                 </div>
 
                 {/* Email */}
                 <div>
                   <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Email
+                    Email (Optional)
                   </label>
                   <input
                     type="email"
@@ -263,15 +264,15 @@ const BookTestModal = ({ isOpen, onClose }) => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
+                    className={`w-full px-3 sm:px-4 py-3 text-base bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
                       errors.email
                         ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                        : 'border-gray-200 focus:border-cyan-500 focus:ring-cyan-200'
+                        : 'border-gray-300 focus:border-[#2d5a7b] focus:ring-cyan-200'
                     }`}
                     placeholder="your.email@example.com"
                   />
                   {errors.email && (
-                    <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                    <p className="mt-1.5 text-sm text-red-600">{errors.email}</p>
                   )}
                 </div>
 
@@ -286,15 +287,15 @@ const BookTestModal = ({ isOpen, onClose }) => {
                     value={formData.fullAddress}
                     onChange={handleChange}
                     rows="3"
-                    className={`w-full px-4 py-3 bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all resize-none ${
+                    className={`w-full px-3 sm:px-4 py-3 text-base bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all resize-none ${
                       errors.fullAddress
                         ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                        : 'border-gray-200 focus:border-cyan-500 focus:ring-cyan-200'
+                        : 'border-gray-300 focus:border-[#2d5a7b] focus:ring-cyan-200'
                     }`}
                     placeholder="Enter your complete address"
                   />
                   {errors.fullAddress && (
-                    <p className="mt-1 text-sm text-red-600">{errors.fullAddress}</p>
+                    <p className="mt-1.5 text-sm text-red-600">{errors.fullAddress}</p>
                   )}
                 </div>
 
@@ -310,14 +311,14 @@ const BookTestModal = ({ isOpen, onClose }) => {
                     value={formData.preferredDate}
                     onChange={handleChange}
                     min={new Date().toISOString().split('T')[0]}
-                    className={`w-full px-4 py-3 bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
+                    className={`w-full px-3 sm:px-4 py-3 text-base bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
                       errors.preferredDate
                         ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                        : 'border-gray-200 focus:border-cyan-500 focus:ring-cyan-200'
+                        : 'border-gray-300 focus:border-[#2d5a7b] focus:ring-cyan-200'
                     }`}
                   />
                   {errors.preferredDate && (
-                    <p className="mt-1 text-sm text-red-600">{errors.preferredDate}</p>
+                    <p className="mt-1.5 text-sm text-red-600">{errors.preferredDate}</p>
                   )}
                 </div>
 
@@ -331,10 +332,10 @@ const BookTestModal = ({ isOpen, onClose }) => {
                     name="preferredTimeSlot"
                     value={formData.preferredTimeSlot}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
+                    className={`w-full px-3 sm:px-4 py-3 text-base bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
                       errors.preferredTimeSlot
                         ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                        : 'border-gray-200 focus:border-cyan-500 focus:ring-cyan-200'
+                        : 'border-gray-300 focus:border-[#2d5a7b] focus:ring-cyan-200'
                     }`}
                   >
                     <option value="">Select Time Slot</option>
@@ -345,14 +346,14 @@ const BookTestModal = ({ isOpen, onClose }) => {
                     ))}
                   </select>
                   {errors.preferredTimeSlot && (
-                    <p className="mt-1 text-sm text-red-600">{errors.preferredTimeSlot}</p>
+                    <p className="mt-1.5 text-sm text-red-600">{errors.preferredTimeSlot}</p>
                   )}
                 </div>
 
                 {/* Additional Notes */}
                 <div>
                   <label htmlFor="additionalNotes" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Additional Notes
+                    Additional Notes (Optional)
                   </label>
                   <textarea
                     id="additionalNotes"
@@ -360,23 +361,23 @@ const BookTestModal = ({ isOpen, onClose }) => {
                     value={formData.additionalNotes}
                     onChange={handleChange}
                     rows="3"
-                    className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:border-cyan-500 focus:ring-cyan-200 transition-all resize-none"
+                    className="w-full px-3 sm:px-4 py-3 text-base bg-white border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:border-[#2d5a7b] focus:ring-cyan-200 transition-all resize-none"
                     placeholder="Any special requirements or notes..."
                   />
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex gap-3 pt-4">
+                {/* Action Buttons - Sticky on mobile */}
+                <div className="sticky bottom-0 -mx-4 sm:-mx-6 -mb-4 sm:-mb-6 bg-white border-t border-gray-200 px-4 sm:px-6 py-4 sm:py-5 space-y-3 sm:space-y-0 sm:flex sm:gap-3">
                   <button
                     type="button"
                     onClick={handleCancel}
-                    className="flex-1 px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-xl transition-colors"
+                    className="w-full sm:flex-1 px-6 py-3.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-colors text-base"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 px-6 py-3 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-xl"
+                    className="w-full sm:flex-1 px-6 py-3.5 bg-gradient-to-br from-[#1e3a5f] via-[#2d5a7b] to-[#1a4d6d] hover:from-[#1a3352] hover:via-[#274d6a] hover:to-[#16425e] text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-xl text-base"
                   >
                     Confirm Booking
                   </button>
@@ -388,12 +389,25 @@ const BookTestModal = ({ isOpen, onClose }) => {
           {/* Global CSS to hide scrollbar */}
           <style jsx global>{`
             .custom-scrollbar {
-              scrollbar-width: none; /* Firefox */
-              -ms-overflow-style: none; /* IE and Edge */
+              scrollbar-width: thin;
+              scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
             }
             
             .custom-scrollbar::-webkit-scrollbar {
-              display: none; /* Chrome, Safari, Opera */
+              width: 6px;
+            }
+            
+            .custom-scrollbar::-webkit-scrollbar-track {
+              background: transparent;
+            }
+            
+            .custom-scrollbar::-webkit-scrollbar-thumb {
+              background-color: rgba(156, 163, 175, 0.5);
+              border-radius: 3px;
+            }
+            
+            .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+              background-color: rgba(156, 163, 175, 0.7);
             }
           `}</style>
         </>

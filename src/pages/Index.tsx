@@ -6,6 +6,8 @@ import { LocationsSection } from '@/components/home/LocationsSection';
 import { CTASection } from '@/components/home/CTASection';
 import { LabPartnersSection } from '@/components/home/LabPartnerSection';
 import { WhyChooseSection } from '@/components/home/WhyChooseSection';
+import { WhatsAppButton } from '@/components/home/WhatsAppButton';
+import ServicesSection from '@/components/home/ServicesSection';
 
 const Index = () => {
   return (
@@ -13,11 +15,13 @@ const Index = () => {
       <Header />
       <main>
         <HeroSection />
+        <ServicesSection/>
         <TestCategoriesSection />
         <LabPartnersSection/>
         <LocationsSection />
         <WhyChooseSection/>
         <CTASection />
+        <WhatsAppButton/>
       </main>
       <Footer />
     </div>

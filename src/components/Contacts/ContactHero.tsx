@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import background from "../../assets/title-image.jpg";
+import { motion } from 'framer-motion';
+import { Sparkles, MessageCircle } from 'lucide-react';
 
 const ContactHero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -9,65 +10,134 @@ const ContactHero = () => {
   }, []);
  
   return (
-    <div className="relative h-[440px] pt-10 md:pt-20 flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${background})`
-        }}
-      >
-        {/* Dark overlay to match the original design */}
-        <div className="absolute inset-0 bg-slate-900/85"></div>
-      </div>
-             
-      {/* Subtle floating elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-2 h-2 bg-pink-300 rounded-full opacity-40 animate-pulse"></div>
-        <div className="absolute top-32 right-32 w-1 h-1 bg-pink-200 rounded-full opacity-30 animate-ping"></div>
-        <div className="absolute bottom-40 left-40 w-1.5 h-1.5 bg-pink-300 rounded-full opacity-50 animate-bounce"></div>
-        <div className="absolute top-60 right-60 w-1 h-1 bg-pink-200 rounded-full opacity-40 animate-pulse"></div>
-      </div>
-             
-      {/* Main Content */}
-      <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
-                 
-        {/* About Us Title */}
-        <h1 
-          className={`mb-4 transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-          style={{
-            fontFamily: 'Philosopher, sans-serif',
-            fontWeight: 600,
-            fontSize: '55px',
-            lineHeight: '77px',
-            color: 'rgb(255, 255, 255)',
-            fontStyle: 'normal'
+    <section className="relative min-h-[60vh] lg:min-h-[70vh] flex items-center overflow-hidden pt-24 lg:pt-32 pb-12 lg:pb-16">
+      {/* Animated Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1e3a5f] via-[#2d5a7b] to-[#1a4d6d]">
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            x: [0, 50, 0],
+            y: [0, -30, 0],
           }}
-        >
-          Contact Us
-        </h1>
-                 
-        {/* Description */}
-        <div className={`space-y-6 transform transition-all duration-1000 delay-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <p 
+          transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute top-0 right-0 w-72 h-72 lg:w-96 lg:h-96 bg-cyan-500/20 rounded-full blur-3xl"
+        />
+        <motion.div
+          animate={{
+            scale: [1, 1.3, 1],
+            x: [0, -40, 0],
+            y: [0, 40, 0],
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute bottom-0 left-0 w-72 h-72 lg:w-96 lg:h-96 bg-emerald-500/20 rounded-full blur-3xl"
+        />
+        
+        {/* Floating particles */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(15)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-white/40 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                opacity: [0.2, 0.5, 0.2],
+                scale: [1, 1.5, 1],
+              }}
+              transition={{
+                duration: 3 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+              }}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/20 backdrop-blur-sm border border-emerald-400/30 text-white text-sm font-medium mb-6"
+          >
+            <motion.span 
+              className="w-2 h-2 bg-emerald-400 rounded-full"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [1, 0.8, 1],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+              }}
+            />
+            <MessageCircle className="w-4 h-4" />
+            <span>Get In Touch With Us</span>
+          </motion.div>
+
+          {/* Contact Us Title */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 lg:mb-8"
             style={{
-              fontFamily: '"PT Sans", sans-serif',
-              fontWeight: 400,
-              fontSize: '17px',
-              lineHeight: '27px',
-              color: 'rgb(215, 215, 215)',
-              fontStyle: 'normal'
+              fontFamily: 'Philosopher, sans-serif',
             }}
           >
-           Connect With <span className="text-blue-400 font-semibold">MediKites</span> To Get More Information & Partner With Us In Our Venture
-          </p>
+            Contact Us
+          </motion.h1>
+          
+          {/* Description */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="space-y-6"
+          >
+            <p 
+              className="text-base lg:text-lg text-white/90 leading-relaxed px-4"
+              style={{
+                fontFamily: '"PT Sans", sans-serif',
+              }}
+            >
+              Connect With{' '}
+              <motion.span 
+                className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-cyan-300 to-emerald-300 font-semibold"
+                animate={{
+                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: 'linear',
+                }}
+                style={{
+                  backgroundSize: '200% 200%',
+                }}
+              >
+                MediKites
+              </motion.span>{' '}
+              To Get More Information & Partner With Us In Our Venture
+            </p>
+          </motion.div>
+          
+          {/* Decorative underline */}
+          <motion.div
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="w-32 h-[2px] bg-gradient-to-r from-cyan-400 via-emerald-400 to-transparent mx-auto mt-8 lg:mt-10"
+          />
         </div>
-                 
-        {/* Decorative underline */}
-        <div className={`w-32 h-[1px] bg-gradient-to-r from-blue-400 to-transparent mx-auto mt-8 transform transition-all duration-1000 delay-700 ${isVisible ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`}></div>
       </div>
-     
-    </div>
+    </section>
   );
 };
 

@@ -31,13 +31,13 @@ const socialLinks = [
 export const Footer = () => {
   return (
     <footer 
-      className="border-t border-white/30"
+      className="border-t border-gray-200"
       style={{
-        background: 'linear-gradient(135deg, #e0f7fa 0%, #b3e5fc 50%, #81d4fa 100%)',
+        background: 'linear-gradient(135deg, #f0f4f8 0%, #e6eef5 50%, #dce7f0 100%)',
       }}
     >
       {/* Main Footer */}
-      <div className="container-custom py-12 md:py-16">
+      <div className="container mx-auto px-4 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-6">
@@ -58,8 +58,8 @@ export const Footer = () => {
                 whileHover={{ x: 5 }}
                 className="flex items-center gap-3 text-gray-700 hover:text-gray-900 transition-all duration-200 group"
               >
-                <div className="w-10 h-10 rounded-lg bg-white/50 flex items-center justify-center group-hover:bg-white/70 transition-colors">
-                  <Phone className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-lg bg-white/80 border border-gray-200 flex items-center justify-center group-hover:bg-white transition-colors shadow-sm">
+                  <Phone className="w-5 h-5 text-gray-700" />
                 </div>
                 <span className="font-medium text-sm md:text-base">+91 620 083 7385</span>
               </motion.a>
@@ -68,8 +68,8 @@ export const Footer = () => {
                 whileHover={{ x: 5 }}
                 className="flex items-center gap-3 text-gray-700 hover:text-gray-900 transition-all duration-200 group"
               >
-                <div className="w-10 h-10 rounded-lg bg-white/50 flex items-center justify-center group-hover:bg-white/70 transition-colors">
-                  <Mail className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-lg bg-white/80 border border-gray-200 flex items-center justify-center group-hover:bg-white transition-colors shadow-sm">
+                  <Mail className="w-5 h-5 text-gray-700" />
                 </div>
                 <span className="font-medium text-sm md:text-base">info.medikites@gmail.com</span>
               </motion.a>
@@ -77,8 +77,8 @@ export const Footer = () => {
                 whileHover={{ x: 5 }}
                 className="flex items-start gap-3 text-gray-700 group"
               >
-                <div className="w-10 h-10 rounded-lg bg-white/50 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-white/70 transition-colors">
-                  <MapPin className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-lg bg-white/80 border border-gray-200 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-white transition-colors shadow-sm">
+                  <MapPin className="w-5 h-5 text-gray-700" />
                 </div>
                 <span className="font-medium text-sm md:text-base leading-relaxed">
                   No 88-250-5AC-922, HRBR 1st Block, Kalyan Nagar, Bengaluru, Karnataka, 560043
@@ -112,10 +112,10 @@ export const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-white/30" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>
-        <div className="container-custom py-6">
+      <div className="border-t border-gray-300" style={{ backgroundColor: 'rgba(255, 255, 255, 0.4)' }}>
+        <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-xs md:text-sm text-gray-700 text-center md:text-left font-medium">
+            <p className="text-xs md:text-sm text-gray-600 text-center md:text-left font-medium">
               © {new Date().getFullYear()} Medikites Healthcare Services. All rights reserved.
             </p>
             <div className="flex items-center gap-3">
@@ -125,16 +125,7 @@ export const Footer = () => {
                   href={social.href}
                   whileHover={{ scale: 1.1, y: -3 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 rounded-lg bg-white/40 flex items-center justify-center text-gray-700 hover:text-white hover:shadow-lg transition-all duration-200"
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.4)',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, #2196F3 0%, #42a5f5 100%)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.4)';
-                  }}
+                  className="w-10 h-10 rounded-lg bg-white/80 border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-blue-500 hover:text-white hover:border-blue-500 hover:shadow-lg transition-all duration-200"
                   aria-label={social.label}
                 >
                   <social.icon className="w-5 h-5" />
