@@ -16,6 +16,8 @@ import MapSection from '@/components/Contacts/MapsSection';
 import LabLocations from '@/components/Contacts/LabLocations';
 import OperatingHoursEnhanced from '@/components/Contacts/OperatingHours';
 import ContactForm from '@/components/Contacts/ContactForm';
+import { WhatsAppButton } from '@/components/home/WhatsAppButton';
+import PartnerWithUs from '@/components/Contacts/PartnerWithUs';
 
 const contactMethods = [
   {
@@ -66,9 +68,11 @@ const Contact = () => {
       <main>
        <ContactHero/>
        <MapSection/>
+       <PartnerWithUs/>
        <LabLocations/>
        <OperatingHoursEnhanced/>
        <ContactForm/>
+       <WhatsAppButton/>
       </main>
       <Footer />
     </div>

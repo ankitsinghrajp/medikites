@@ -8,6 +8,8 @@ import { LabPartnersSection } from '@/components/home/LabPartnerSection';
 import { WhyChooseSection } from '@/components/home/WhyChooseSection';
 import { WhatsAppButton } from '@/components/home/WhatsAppButton';
 import ServicesSection from '@/components/home/ServicesSection';
+import { HowItWorksSection } from '@/components/home/HowItWorksSection';
+import { TestimonialsSection } from '@/components/home/TestimonialsSection';
 
 const Index = () => {
   return (
@@ -19,6 +21,8 @@ const Index = () => {
         <TestCategoriesSection />
         <LabPartnersSection/>
         <LocationsSection />
+        <HowItWorksSection/>
+        <TestimonialsSection/>
         <WhyChooseSection/>
         <CTASection />
         <WhatsAppButton/>

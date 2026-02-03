@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
   Heart, 
@@ -28,6 +29,7 @@ import BookTestModal from '@/components/home/BookNowModal';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/home/WhatsAppButton';
+
 const services = {
   homeHealthcare: {
     title: 'Home Healthcare Services',
@@ -35,11 +37,36 @@ const services = {
     color: 'from-blue-500 to-cyan-500',
     bgColor: 'bg-blue-50',
     services: [
-      { name: 'Home Attendant / Caretaker', icon: UserRound, description: '24/7 professional care at home' },
-      { name: 'Skilled Home Nursing', icon: Heart, description: 'Certified nurses for medical care' },
-      { name: 'Baby Care & Elderly Care', icon: Baby, description: 'Specialized care for all ages' },
-      { name: 'Physiotherapy at Home', icon: Activity, description: 'Expert physical therapy sessions' },
-      { name: 'ICU Setup at Home', icon: BedDouble, description: 'Hospital-grade ICU facilities' }
+      { 
+        name: 'Home Attendant / Caretaker', 
+        slug: 'home-attendant-caretaker',
+        icon: UserRound, 
+        description: '24/7 professional care at home' 
+      },
+      { 
+        name: 'Skilled Home Nursing', 
+        slug: 'skilled-home-nursing',
+        icon: Heart, 
+        description: 'Certified nurses for medical care' 
+      },
+      { 
+        name: 'Baby Care & Elderly Care', 
+        slug: 'baby-elderly-care',
+        icon: Baby, 
+        description: 'Specialized care for all ages' 
+      },
+      { 
+        name: 'Physiotherapy at Home', 
+        slug: 'physiotherapy-at-home',
+        icon: Activity, 
+        description: 'Expert physical therapy sessions' 
+      },
+      { 
+        name: 'ICU Setup at Home', 
+        slug: 'icu-setup-at-home',
+        icon: BedDouble, 
+        description: 'Hospital-grade ICU facilities' 
+      }
     ]
   },
   onCallMedical: {
@@ -48,11 +75,36 @@ const services = {
     color: 'from-emerald-500 to-teal-500',
     bgColor: 'bg-emerald-50',
     services: [
-      { name: 'Injection & IV Infusion', icon: Syringe, description: 'Safe medication administration' },
-      { name: 'Wound Dressing at Home', icon: Shield, description: 'Professional wound care' },
-      { name: "Ryle's Tube / Catheter Change", icon: Pill, description: 'Expert tube management' },
-      { name: 'Tracheostomy Care', icon: Wind, description: 'Specialized respiratory care' },
-      { name: 'Cannulation Insertion', icon: Activity, description: 'IV line insertion by experts' }
+      { 
+        name: 'Injection & IV Infusion', 
+        slug: 'injection-iv-infusion',
+        icon: Syringe, 
+        description: 'Safe medication administration' 
+      },
+      { 
+        name: 'Wound Dressing at Home', 
+        slug: 'wound-dressing-at-home',
+        icon: Shield, 
+        description: 'Professional wound care' 
+      },
+      { 
+        name: "Ryle's Tube / Catheter Change", 
+        slug: 'ryles-tube-catheter-change',
+        icon: Pill, 
+        description: 'Expert tube management' 
+      },
+      { 
+        name: 'Tracheostomy Care', 
+        slug: 'tracheostomy-care',
+        icon: Wind, 
+        description: 'Specialized respiratory care' 
+      },
+      { 
+        name: 'Cannulation Insertion', 
+        slug: 'cannulation-insertion',
+        icon: Activity, 
+        description: 'IV line insertion by experts' 
+      }
     ]
   },
   diagnostics: {
@@ -61,12 +113,42 @@ const services = {
     color: 'from-purple-500 to-pink-500',
     bgColor: 'bg-purple-50',
     services: [
-      { name: 'Master Health Check-ups', icon: FileHeart, description: 'Comprehensive health screening' },
-      { name: 'Blood Tests at Home', icon: TestTube, description: '300+ tests available' },
-      { name: 'Thyroid | Diabetes | Cardiac Tests', icon: HeartPulse, description: 'Specialized health tests' },
-      { name: 'Infertility & Hormonal Test', icon: Activity, description: 'Complete hormonal profiling' },
-      { name: 'Cancer Screening | Genetic Tests', icon: Microscope, description: 'Advanced diagnostic testing' },
-      { name: 'Biological Age Test', icon: Clock, description: 'Know your biological age' }
+      { 
+        name: 'Master Health Check-ups', 
+        slug: 'master-health-checkups',
+        icon: FileHeart, 
+        description: 'Comprehensive health screening' 
+      },
+      { 
+        name: 'Blood Tests at Home', 
+        slug: 'blood-tests-at-home',
+        icon: TestTube, 
+        description: '300+ tests available' 
+      },
+      { 
+        name: 'Thyroid | Diabetes | Cardiac Tests', 
+        slug: 'thyroid-diabetes-cardiac-tests',
+        icon: HeartPulse, 
+        description: 'Specialized health tests' 
+      },
+      { 
+        name: 'Infertility & Hormonal Test', 
+        slug: 'infertility-hormonal-test',
+        icon: Activity, 
+        description: 'Complete hormonal profiling' 
+      },
+      { 
+        name: 'Cancer Screening | Genetic Tests', 
+        slug: 'cancer-genetic-tests',
+        icon: Microscope, 
+        description: 'Advanced diagnostic testing' 
+      },
+      { 
+        name: 'Biological Age Test', 
+        slug: 'biological-age-test',
+        icon: Clock, 
+        description: 'Know your biological age' 
+      }
     ]
   },
   imaging: {
@@ -75,10 +157,30 @@ const services = {
     color: 'from-orange-500 to-red-500',
     bgColor: 'bg-orange-50',
     services: [
-      { name: 'X-Ray & ECG at Home', icon: Activity, description: 'Portable imaging services' },
-      { name: 'X-Ray | Ultrasound', icon: Scan, description: 'Digital imaging facility' },
-      { name: '2D Echo', icon: HeartPulse, description: 'Cardiac imaging' },
-      { name: 'CT Scan | MRI Scan', icon: Scan, description: 'Advanced imaging technology' }
+      { 
+        name: 'X-Ray & ECG at Home', 
+        slug: 'xray-ecg-at-home',
+        icon: Activity, 
+        description: 'Portable imaging services' 
+      },
+      { 
+        name: 'X-Ray | Ultrasound', 
+        slug: 'xray-ultrasound',
+        icon: Scan, 
+        description: 'Digital imaging facility' 
+      },
+      { 
+        name: '2D Echo', 
+        slug: '2d-echo',
+        icon: HeartPulse, 
+        description: 'Cardiac imaging' 
+      },
+      { 
+        name: 'CT Scan | MRI Scan', 
+        slug: 'ct-mri-scan',
+        icon: Scan, 
+        description: 'Advanced imaging technology' 
+      }
     ]
   },
   equipment: {
@@ -87,11 +189,36 @@ const services = {
     color: 'from-rose-500 to-pink-500',
     bgColor: 'bg-rose-50',
     services: [
-      { name: 'Oxygen Concentrator / Cylinder', icon: Wind, description: 'Respiratory support equipment' },
-      { name: 'Ventilator | BiPAP | CPAP', icon: Activity, description: 'Advanced breathing assistance' },
-      { name: 'Hospital Bed | Wheelchair', icon: Wind, description: 'Mobility & comfort solutions' },
-      { name: 'ICU Monitor | DVT Pump', icon: Activity, description: 'Critical care equipment' },
-      { name: 'Air Mattress | Suction Machine', icon: BedDouble, description: 'Patient comfort devices' }
+      { 
+        name: 'Oxygen Concentrator / Cylinder', 
+        slug: 'oxygen-concentrator-cylinder',
+        icon: Wind, 
+        description: 'Respiratory support equipment' 
+      },
+      { 
+        name: 'Ventilator | BiPAP | CPAP', 
+        slug: 'ventilator-bipap-cpap',
+        icon: Activity, 
+        description: 'Advanced breathing assistance' 
+      },
+      { 
+        name: 'Hospital Bed | Wheelchair', 
+        slug: 'hospital-bed-wheelchair',
+        icon: Wind, 
+        description: 'Mobility & comfort solutions' 
+      },
+      { 
+        name: 'ICU Monitor | DVT Pump', 
+        slug: 'icu-monitor-dvt-pump',
+        icon: Activity, 
+        description: 'Critical care equipment' 
+      },
+      { 
+        name: 'Air Mattress | Suction Machine', 
+        slug: 'air-mattress-suction-machine',
+        icon: BedDouble, 
+        description: 'Patient comfort devices' 
+      }
     ]
   }
 };
@@ -135,33 +262,41 @@ const ServiceCard = ({ service, index, categoryColor }) => {
   const Icon = service.icon;
   
   return (
-    <motion.div
-      variants={itemVariants}
-      whileHover={{ y: -8, transition: { duration: 0.3 } }}
-      className="group"
-    >
-      <div className="relative h-full bg-white rounded-xl lg:rounded-2xl p-5 lg:p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100">
-        {/* Icon */}
-        <motion.div
-          className={`w-12 h-12 lg:w-14 lg:h-14 rounded-xl bg-gradient-to-br ${categoryColor} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}
-          whileHover={{ rotate: 360 }}
-          transition={{ duration: 0.6 }}
-        >
-          <Icon className="w-6 h-6 lg:w-7 lg:h-7 text-white" />
-        </motion.div>
+    <Link to={`/services/${service.slug}`} className="block">
+      <motion.div
+        variants={itemVariants}
+        whileHover={{ y: -8, transition: { duration: 0.3 } }}
+        className="group cursor-pointer"
+      >
+        <div className="relative h-full bg-white rounded-xl lg:rounded-2xl p-5 lg:p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100">
+          {/* Icon */}
+          <motion.div
+            className={`w-12 h-12 lg:w-14 lg:h-14 rounded-xl bg-gradient-to-br ${categoryColor} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}
+            whileHover={{ rotate: 360 }}
+            transition={{ duration: 0.6 }}
+          >
+            <Icon className="w-6 h-6 lg:w-7 lg:h-7 text-white" />
+          </motion.div>
 
-        {/* Content */}
-        <h4 className="text-base lg:text-lg font-bold text-gray-900 mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-600 group-hover:to-emerald-600 transition-all">
-          {service.name}
-        </h4>
-        <p className="text-sm text-gray-600 mb-4">{service.description}</p>
+          {/* Content */}
+          <h4 className="text-base lg:text-lg font-bold text-gray-900 mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-600 group-hover:to-emerald-600 transition-all">
+            {service.name}
+          </h4>
+          <p className="text-sm text-gray-600 mb-4">{service.description}</p>
 
-        {/* Decorative bottom line */}
-        <motion.div
-          className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r ${categoryColor} w-0 group-hover:w-full transition-all duration-500 rounded-b-xl lg:rounded-b-2xl`}
-        />
-      </div>
-    </motion.div>
+          {/* View Details Link */}
+          <div className="flex items-center gap-2 text-sm font-semibold text-cyan-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <span>View Details</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </div>
+
+          {/* Decorative bottom line */}
+          <motion.div
+            className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r ${categoryColor} w-0 group-hover:w-full transition-all duration-500 rounded-b-xl lg:rounded-b-2xl`}
+          />
+        </div>
+      </motion.div>
+    </Link>
   );
 };
 
@@ -189,7 +324,6 @@ const CategorySection = ({ categoryKey, data, index }) => {
           <h3 className="text-2xl lg:text-3xl font-bold text-gray-900">
             {data.title}
           </h3>
-         
         </div>
       </div>
 
@@ -524,7 +658,7 @@ export const ServicesPage = () => {
         </section>
     
       </div>
-          <Footer/>
+      <Footer/>
       {/* Book Modal */}
       <BookTestModal 
         isOpen={isBookModalOpen} 

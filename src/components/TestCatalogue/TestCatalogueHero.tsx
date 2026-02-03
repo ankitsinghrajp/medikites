@@ -91,7 +91,7 @@ const TestCatalogueHero = () => {
               fontFamily: 'Philosopher, sans-serif',
             }}
           >
-            Tests
+           Lab Tests
           </motion.h1>
           
           {/* Description */}

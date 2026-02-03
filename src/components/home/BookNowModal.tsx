@@ -1,10 +1,12 @@
-import { useState } from 'react';
-import { X, Sparkles } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { X, Sparkles, Beaker, Package } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const BookTestModal = ({ isOpen, onClose }) => {
+const BookTestModal = ({ isOpen, onClose, preSelectedTest }) => {
   const [formData, setFormData] = useState({
-    serviceType: '',
+    testName: '',
+    testPrice: '',
+    testType: '',
     fullName: '',
     mobileNumber: '',
     email: '',
@@ -16,12 +18,10 @@ const BookTestModal = ({ isOpen, onClose }) => {
 
   const [errors, setErrors] = useState({});
 
-  const serviceTypes = [
-    "Home Collection",
-    "Lab Visit"
-  ];
-
   const timeSlots = [
+    '06:00 - 07:00 AM',
+    '07:00 - 08:00 AM',
+    '08:00 - 09:00 AM',
     '09:00 - 10:00 AM',
     '10:00 - 11:00 AM',
     '11:00 - 12:00 PM',
@@ -29,9 +29,20 @@ const BookTestModal = ({ isOpen, onClose }) => {
     '01:00 - 02:00 PM',
     '02:00 - 03:00 PM',
     '03:00 - 04:00 PM',
-    '04:00 - 05:00 PM',
-    '05:00 - 06:00 PM'
+    '04:00 - 05:00 PM'
   ];
+
+  // Pre-fill test information when modal opens with a selected test
+  useEffect(() => {
+    if (preSelectedTest && isOpen) {
+      setFormData(prev => ({
+        ...prev,
+        testName: preSelectedTest.name || '',
+        testPrice: preSelectedTest.price || preSelectedTest.discountedPrice || '',
+        testType: preSelectedTest.type || 'test'
+      }));
+    }
+  }, [preSelectedTest, isOpen]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,10 +61,6 @@ const BookTestModal = ({ isOpen, onClose }) => {
 
   const validateForm = () => {
     const newErrors = {};
-
-    if (!formData.serviceType) {
-      newErrors.serviceType = 'Please select a service type';
-    }
 
     if (!formData.fullName.trim()) {
       newErrors.fullName = 'Full name is required';
@@ -92,13 +99,17 @@ const BookTestModal = ({ isOpen, onClose }) => {
       return;
     }
 
-    // Create WhatsApp message
-    const whatsappMessage = `*New Test Booking Request*%0A%0A` +
-      `*Service Type:* ${formData.serviceType}%0A` +
+    // Create WhatsApp message with test details
+    const itemType = formData.testType === 'package' ? 'Health Package' : 'Test';
+    const whatsappMessage = `*New ${itemType} Booking Request*%0A%0A` +
+      `*${itemType} Name:* ${formData.testName}%0A` +
+      `*Price:* ₹${formData.testPrice}%0A%0A` +
+      `*Customer Details:*%0A` +
       `*Full Name:* ${formData.fullName}%0A` +
       `*Mobile Number:* ${formData.mobileNumber}%0A` +
       `*Email:* ${formData.email || 'Not provided'}%0A` +
-      `*Full Address:* ${formData.fullAddress}%0A` +
+      `*Full Address:* ${formData.fullAddress}%0A%0A` +
+      `*Appointment Details:*%0A` +
       `*Preferred Date:* ${formData.preferredDate}%0A` +
       `*Preferred Time Slot:* ${formData.preferredTimeSlot}%0A` +
       `*Additional Notes:* ${formData.additionalNotes || 'None'}`;
@@ -108,22 +119,15 @@ const BookTestModal = ({ isOpen, onClose }) => {
     window.open(whatsappURL, '_blank');
 
     // Reset form and close modal
-    setFormData({
-      serviceType: '',
-      fullName: '',
-      mobileNumber: '',
-      email: '',
-      fullAddress: '',
-      preferredDate: '',
-      preferredTimeSlot: '',
-      additionalNotes: ''
-    });
+    resetForm();
     onClose();
   };
 
-  const handleCancel = () => {
+  const resetForm = () => {
     setFormData({
-      serviceType: '',
+      testName: '',
+      testPrice: '',
+      testType: '',
       fullName: '',
       mobileNumber: '',
       email: '',
@@ -133,6 +137,10 @@ const BookTestModal = ({ isOpen, onClose }) => {
       additionalNotes: ''
     });
     setErrors({});
+  };
+
+  const handleCancel = () => {
+    resetForm();
     onClose();
   };
 
@@ -160,13 +168,20 @@ const BookTestModal = ({ isOpen, onClose }) => {
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               className="relative w-full sm:w-[95%] sm:max-w-2xl max-h-[95vh] sm:max-h-[90vh] overflow-hidden bg-white sm:rounded-3xl rounded-t-3xl shadow-2xl flex flex-col"
             >
-              {/* Header - Sticky with gradient background from hero section */}
+              {/* Header - Sticky with gradient background */}
               <div className="sticky top-0 bg-gradient-to-br from-[#1e3a5f] via-[#2d5a7b] to-[#1a4d6d] text-white px-4 sm:px-6 py-4 sm:py-5 sm:rounded-t-3xl rounded-t-3xl flex items-center justify-between z-10 shadow-md">
                 <div className="flex items-center gap-2 sm:gap-3">
                   <div className="w-9 h-9 sm:w-10 sm:h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
-                    <Sparkles className="w-5 h-5 sm:w-6 sm:h-6" />
+                    {formData.testType === 'package' ? (
+                      <Package className="w-5 h-5 sm:w-6 sm:h-6" />
+                    ) : (
+                      <Beaker className="w-5 h-5 sm:w-6 sm:h-6" />
+                    )}
                   </div>
-                  <h2 className="text-xl sm:text-2xl font-bold">Book Test</h2>
+                  <div>
+                    <h2 className="text-xl sm:text-2xl font-bold">Book Test</h2>
+                    <p className="text-xs sm:text-sm text-white/80">Complete your booking details</p>
+                  </div>
                 </div>
                 <button
                   onClick={handleCancel}
@@ -179,179 +194,195 @@ const BookTestModal = ({ isOpen, onClose }) => {
 
               {/* Form - Scrollable */}
               <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 sm:py-6 space-y-4 sm:space-y-5 custom-scrollbar">
-                {/* Service Type */}
-                <div>
-                  <label htmlFor="serviceType" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Service Type <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    id="serviceType"
-                    name="serviceType"
-                    value={formData.serviceType}
-                    onChange={handleChange}
-                    className={`w-full px-3 sm:px-4 py-3 text-base bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
-                      errors.serviceType
-                        ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                        : 'border-gray-300 focus:border-[#2d5a7b] focus:ring-cyan-200'
-                    }`}
-                  >
-                    <option value="">Select Service Type</option>
-                    {serviceTypes.map((type, index) => (
-                      <option key={index} value={type}>
-                        {type}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.serviceType && (
-                    <p className="mt-1.5 text-sm text-red-600">{errors.serviceType}</p>
-                  )}
+                {/* Test Information Card - Pre-filled and Read-only */}
+                {formData.testName && (
+                  <div className="bg-gradient-to-br from-emerald-50 to-cyan-50 border-2 border-emerald-200 rounded-xl p-4 sm:p-5">
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-emerald-500 to-cyan-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                        {formData.testType === 'package' ? (
+                          <Package className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                        ) : (
+                          <Beaker className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs text-emerald-700 font-medium mb-1">
+                          {formData.testType === 'package' ? 'Selected Health Package' : 'Selected Test'}
+                        </p>
+                        <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1 break-words">
+                          {formData.testName}
+                        </h3>
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-xl sm:text-2xl font-bold text-emerald-600">
+                            ₹{formData.testPrice}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Customer Information Section */}
+                <div className="border-t-2 border-gray-200 pt-4">
+                  <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <span className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm">1</span>
+                    Customer Information
+                  </h3>
+
+                  {/* Full Name */}
+                  <div className="mb-4">
+                    <label htmlFor="fullName" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Full Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="fullName"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      className={`w-full px-3 sm:px-4 py-3 text-base bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
+                        errors.fullName
+                          ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                          : 'border-gray-300 focus:border-[#2d5a7b] focus:ring-cyan-200'
+                      }`}
+                      placeholder="Enter your full name"
+                    />
+                    {errors.fullName && (
+                      <p className="mt-1.5 text-sm text-red-600">{errors.fullName}</p>
+                    )}
+                  </div>
+
+                  {/* Mobile Number */}
+                  <div className="mb-4">
+                    <label htmlFor="mobileNumber" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Mobile Number <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      id="mobileNumber"
+                      name="mobileNumber"
+                      value={formData.mobileNumber}
+                      onChange={handleChange}
+                      className={`w-full px-3 sm:px-4 py-3 text-base bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
+                        errors.mobileNumber
+                          ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                          : 'border-gray-300 focus:border-[#2d5a7b] focus:ring-cyan-200'
+                      }`}
+                      placeholder="Enter your mobile number"
+                    />
+                    {errors.mobileNumber && (
+                      <p className="mt-1.5 text-sm text-red-600">{errors.mobileNumber}</p>
+                    )}
+                  </div>
+
+                  {/* Email */}
+                  <div className="mb-4">
+                    <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Email (Optional)
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className={`w-full px-3 sm:px-4 py-3 text-base bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
+                        errors.email
+                          ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                          : 'border-gray-300 focus:border-[#2d5a7b] focus:ring-cyan-200'
+                      }`}
+                      placeholder="your.email@example.com"
+                    />
+                    {errors.email && (
+                      <p className="mt-1.5 text-sm text-red-600">{errors.email}</p>
+                    )}
+                  </div>
+
+                  {/* Full Address */}
+                  <div>
+                    <label htmlFor="fullAddress" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Full Address <span className="text-red-500">*</span>
+                    </label>
+                    <textarea
+                      id="fullAddress"
+                      name="fullAddress"
+                      value={formData.fullAddress}
+                      onChange={handleChange}
+                      rows="3"
+                      className={`w-full px-3 sm:px-4 py-3 text-base bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all resize-none ${
+                        errors.fullAddress
+                          ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                          : 'border-gray-300 focus:border-[#2d5a7b] focus:ring-cyan-200'
+                      }`}
+                      placeholder="Enter your complete address for sample collection"
+                    />
+                    {errors.fullAddress && (
+                      <p className="mt-1.5 text-sm text-red-600">{errors.fullAddress}</p>
+                    )}
+                  </div>
                 </div>
 
-                {/* Full Name */}
-                <div>
-                  <label htmlFor="fullName" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Full Name <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="fullName"
-                    name="fullName"
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    className={`w-full px-3 sm:px-4 py-3 text-base bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
-                      errors.fullName
-                        ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                        : 'border-gray-300 focus:border-[#2d5a7b] focus:ring-cyan-200'
-                    }`}
-                    placeholder="Enter your full name"
-                  />
-                  {errors.fullName && (
-                    <p className="mt-1.5 text-sm text-red-600">{errors.fullName}</p>
-                  )}
-                </div>
+                {/* Appointment Details Section */}
+                <div className="border-t-2 border-gray-200 pt-4">
+                  <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <span className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm">2</span>
+                    Appointment Details
+                  </h3>
 
-                {/* Mobile Number */}
-                <div>
-                  <label htmlFor="mobileNumber" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Mobile Number <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    id="mobileNumber"
-                    name="mobileNumber"
-                    value={formData.mobileNumber}
-                    onChange={handleChange}
-                    className={`w-full px-3 sm:px-4 py-3 text-base bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
-                      errors.mobileNumber
-                        ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                        : 'border-gray-300 focus:border-[#2d5a7b] focus:ring-cyan-200'
-                    }`}
-                    placeholder="Enter your mobile number"
-                  />
-                  {errors.mobileNumber && (
-                    <p className="mt-1.5 text-sm text-red-600">{errors.mobileNumber}</p>
-                  )}
-                </div>
+                  {/* Preferred Date */}
+                  <div className="mb-4">
+                    <label htmlFor="preferredDate" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Preferred Date <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="date"
+                      id="preferredDate"
+                      name="preferredDate"
+                      value={formData.preferredDate}
+                      onChange={handleChange}
+                      min={new Date().toISOString().split('T')[0]}
+                      className={`w-full px-3 sm:px-4 py-3 text-base bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
+                        errors.preferredDate
+                          ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                          : 'border-gray-300 focus:border-[#2d5a7b] focus:ring-cyan-200'
+                      }`}
+                    />
+                    {errors.preferredDate && (
+                      <p className="mt-1.5 text-sm text-red-600">{errors.preferredDate}</p>
+                    )}
+                  </div>
 
-                {/* Email */}
-                <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Email (Optional)
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className={`w-full px-3 sm:px-4 py-3 text-base bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
-                      errors.email
-                        ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                        : 'border-gray-300 focus:border-[#2d5a7b] focus:ring-cyan-200'
-                    }`}
-                    placeholder="your.email@example.com"
-                  />
-                  {errors.email && (
-                    <p className="mt-1.5 text-sm text-red-600">{errors.email}</p>
-                  )}
-                </div>
-
-                {/* Full Address */}
-                <div>
-                  <label htmlFor="fullAddress" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Full Address <span className="text-red-500">*</span>
-                  </label>
-                  <textarea
-                    id="fullAddress"
-                    name="fullAddress"
-                    value={formData.fullAddress}
-                    onChange={handleChange}
-                    rows="3"
-                    className={`w-full px-3 sm:px-4 py-3 text-base bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all resize-none ${
-                      errors.fullAddress
-                        ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                        : 'border-gray-300 focus:border-[#2d5a7b] focus:ring-cyan-200'
-                    }`}
-                    placeholder="Enter your complete address"
-                  />
-                  {errors.fullAddress && (
-                    <p className="mt-1.5 text-sm text-red-600">{errors.fullAddress}</p>
-                  )}
-                </div>
-
-                {/* Preferred Date */}
-                <div>
-                  <label htmlFor="preferredDate" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Preferred Date <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="date"
-                    id="preferredDate"
-                    name="preferredDate"
-                    value={formData.preferredDate}
-                    onChange={handleChange}
-                    min={new Date().toISOString().split('T')[0]}
-                    className={`w-full px-3 sm:px-4 py-3 text-base bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
-                      errors.preferredDate
-                        ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                        : 'border-gray-300 focus:border-[#2d5a7b] focus:ring-cyan-200'
-                    }`}
-                  />
-                  {errors.preferredDate && (
-                    <p className="mt-1.5 text-sm text-red-600">{errors.preferredDate}</p>
-                  )}
-                </div>
-
-                {/* Preferred Time Slot */}
-                <div>
-                  <label htmlFor="preferredTimeSlot" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Preferred Time Slot <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    id="preferredTimeSlot"
-                    name="preferredTimeSlot"
-                    value={formData.preferredTimeSlot}
-                    onChange={handleChange}
-                    className={`w-full px-3 sm:px-4 py-3 text-base bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
-                      errors.preferredTimeSlot
-                        ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                        : 'border-gray-300 focus:border-[#2d5a7b] focus:ring-cyan-200'
-                    }`}
-                  >
-                    <option value="">Select Time Slot</option>
-                    {timeSlots.map((slot, index) => (
-                      <option key={index} value={slot}>
-                        {slot}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.preferredTimeSlot && (
-                    <p className="mt-1.5 text-sm text-red-600">{errors.preferredTimeSlot}</p>
-                  )}
+                  {/* Preferred Time Slot */}
+                  <div>
+                    <label htmlFor="preferredTimeSlot" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Preferred Time Slot <span className="text-red-500">*</span>
+                    </label>
+                    <select
+                      id="preferredTimeSlot"
+                      name="preferredTimeSlot"
+                      value={formData.preferredTimeSlot}
+                      onChange={handleChange}
+                      className={`w-full px-3 sm:px-4 py-3 text-base bg-white border-2 rounded-xl focus:outline-none focus:ring-2 transition-all ${
+                        errors.preferredTimeSlot
+                          ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                          : 'border-gray-300 focus:border-[#2d5a7b] focus:ring-cyan-200'
+                      }`}
+                    >
+                      <option value="">Select Time Slot</option>
+                      {timeSlots.map((slot, index) => (
+                        <option key={index} value={slot}>
+                          {slot}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.preferredTimeSlot && (
+                      <p className="mt-1.5 text-sm text-red-600">{errors.preferredTimeSlot}</p>
+                    )}
+                  </div>
                 </div>
 
                 {/* Additional Notes */}
-                <div>
+                <div className="border-t-2 border-gray-200 pt-4">
                   <label htmlFor="additionalNotes" className="block text-sm font-semibold text-gray-700 mb-2">
                     Additional Notes (Optional)
                   </label>
@@ -362,7 +393,7 @@ const BookTestModal = ({ isOpen, onClose }) => {
                     onChange={handleChange}
                     rows="3"
                     className="w-full px-3 sm:px-4 py-3 text-base bg-white border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:border-[#2d5a7b] focus:ring-cyan-200 transition-all resize-none"
-                    placeholder="Any special requirements or notes..."
+                    placeholder="Any special requirements, medical conditions, or notes..."
                   />
                 </div>
 
@@ -377,8 +408,9 @@ const BookTestModal = ({ isOpen, onClose }) => {
                   </button>
                   <button
                     type="submit"
-                    className="w-full sm:flex-1 px-6 py-3.5 bg-gradient-to-br from-[#1e3a5f] via-[#2d5a7b] to-[#1a4d6d] hover:from-[#1a3352] hover:via-[#274d6a] hover:to-[#16425e] text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-xl text-base"
+                    className="w-full sm:flex-1 px-6 py-3.5 bg-gradient-to-br from-[#1e3a5f] via-[#2d5a7b] to-[#1a4d6d] hover:from-[#1a3352] hover:via-[#274d6a] hover:to-[#16425e] text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-xl text-base flex items-center justify-center gap-2"
                   >
+                    <Sparkles className="w-5 h-5" />
                     Confirm Booking
                   </button>
                 </div>

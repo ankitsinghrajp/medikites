@@ -165,7 +165,7 @@ export const TestCategoriesSection = () => {
           </motion.div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Test Categories
+            Lab Tests
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Comprehensive diagnostic testing across 10 key health areas

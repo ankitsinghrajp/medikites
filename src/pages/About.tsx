@@ -17,6 +17,7 @@ import { MissionValuesSection } from '@/components/about/MissionValuesSection';
 import { CertificationsSection } from '@/components/about/CertificationSection';
 import { ExpertTeamSection } from '@/components/about/ExpertTeamSection';
 import { CTASection } from '@/components/home/CTASection';
+import { WhatsAppButton } from '@/components/home/WhatsAppButton';
 
 const stats = [
   { value: '10+', label: 'Years of Excellence' },
@@ -66,7 +67,7 @@ const About = () => {
        <MissionValuesSection/>
        <CertificationsSection/>
        <ExpertTeamSection/>
- 
+      <WhatsAppButton/>
       </main>
       <Footer />
     </div>

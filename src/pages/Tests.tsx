@@ -7,6 +7,8 @@ import { Search, Filter, ArrowRight, Heart, Droplet, Activity, Pill, ChevronLeft
 import { Button } from '@/components/ui/button';
 import TestCatalogueHero from '@/components/TestCatalogue/TestCatalogueHero';
 import { tests as testsData, packages as packagesData, categories as categoriesData, popularTests } from '@/data/data';
+import { WhatsAppButton } from '@/components/home/WhatsAppButton';
+import BookTestModal from '@/components/home/BookNowModal';
 
 // Transform categories data to include counts
 const getAllCategories = () => {
@@ -71,10 +73,12 @@ const Tests = () => {
   
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeTab, setActiveTab] = useState<'tests' | 'packages'>('tests');
+  const [activeTab, setActiveTab] = useState('tests');
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedPackage, setSelectedPackage] = useState<typeof packages[0] | null>(null);
-  const [selectedTest, setSelectedTest] = useState<typeof tests[0] | null>(null);
+  const [selectedPackage, setSelectedPackage] = useState(null);
+  const [selectedTest, setSelectedTest] = useState(null);
+  const [isBookModalOpen, setIsBookModalOpen] = useState(false);
+  const [selectedItemForBooking, setSelectedItemForBooking] = useState(null);
   const itemsPerPage = 8;
 
   // Apply category filter from URL parameter on component mount or when it changes
@@ -123,7 +127,7 @@ const Tests = () => {
     setCurrentPage(1);
   }, [activeCategory, searchQuery, activeTab]);
 
-  const handlePageChange = (page: number) => {
+  const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -138,7 +142,7 @@ const Tests = () => {
     setSearchParams({});
   };
 
-  const handlePopularTagClick = (tag: string) => {
+  const handlePopularTagClick = (tag) => {
     setSearchQuery(tag);
     setActiveTab('tests');
     setActiveCategory('all');
@@ -147,7 +151,7 @@ const Tests = () => {
     setSearchParams({});
   };
 
-  const handleCategoryChange = (categoryId: string) => {
+  const handleCategoryChange = (categoryId) => {
     setActiveCategory(categoryId);
     setCurrentPage(1);
     // Update URL parameter
@@ -156,6 +160,11 @@ const Tests = () => {
     } else {
       setSearchParams({ category: categoryId });
     }
+  };
+
+  const handleBookNow = (item, type) => {
+    setSelectedItemForBooking({ ...item, type });
+    setIsBookModalOpen(true);
   };
 
   // Generate page numbers for pagination
@@ -210,7 +219,7 @@ const Tests = () => {
                   <button
                     key={tab}
                     onClick={() => {
-                      setActiveTab(tab as 'tests' | 'packages');
+                      setActiveTab(tab);
                       setCurrentPage(1);
                     }}
                     className={`flex-1 sm:flex-initial px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl font-medium transition-all text-sm sm:text-base ${
@@ -342,7 +351,7 @@ const Tests = () => {
                       exit={{ opacity: 0 }}
                     >
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
-                        {paginatedItems.map((test: any, index) => (
+                        {paginatedItems.map((test, index) => (
                           <motion.div
                             key={test.id}
                             initial={{ opacity: 0, y: 20 }}
@@ -389,7 +398,10 @@ const Tests = () => {
                                 >
                                   View Details
                                 </button>
-                                <button className="flex-1 px-3 md:px-4 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors text-xs md:text-sm">
+                                <button 
+                                  onClick={() => handleBookNow(test, 'test')}
+                                  className="flex-1 px-3 md:px-4 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors text-xs md:text-sm"
+                                >
                                   Book Now
                                 </button>
                               </div>
@@ -406,7 +418,7 @@ const Tests = () => {
                       exit={{ opacity: 0 }}
                     >
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
-                        {paginatedItems.map((pkg: any, index) => (
+                        {paginatedItems.map((pkg, index) => (
                           <motion.div
                             key={pkg.id}
                             initial={{ opacity: 0, y: 20 }}
@@ -456,7 +468,10 @@ const Tests = () => {
                                 >
                                   View Details
                                 </button>
-                                <button className="flex-1 px-3 md:px-4 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors text-xs md:text-sm">
+                                <button 
+                                  onClick={() => handleBookNow(pkg, 'package')}
+                                  className="flex-1 px-3 md:px-4 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors text-xs md:text-sm"
+                                >
                                   Book Now
                                 </button>
                               </div>
@@ -491,7 +506,7 @@ const Tests = () => {
                         ) : (
                           <button
                             key={page}
-                            onClick={() => handlePageChange(page as number)}
+                            onClick={() => handlePageChange(page)}
                             className={`min-w-[32px] md:min-w-[40px] h-8 md:h-10 rounded-lg font-medium transition-all text-xs md:text-sm ${
                               currentPage === page
                                 ? 'bg-blue-600 text-white'
@@ -606,7 +621,13 @@ const Tests = () => {
                 >
                   Close
                 </button>
-                <button className="w-full sm:w-auto px-6 py-2 md:py-2.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors text-sm md:text-base">
+                <button 
+                  onClick={() => {
+                    handleBookNow(selectedTest, 'test');
+                    setSelectedTest(null);
+                  }}
+                  className="w-full sm:w-auto px-6 py-2 md:py-2.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors text-sm md:text-base"
+                >
                   Book This Test
                 </button>
               </div>
@@ -664,14 +685,31 @@ const Tests = () => {
                 >
                   Close
                 </button>
-                <button className="w-full sm:w-auto px-6 py-2 md:py-2.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors text-sm md:text-base">
+                <button 
+                  onClick={() => {
+                    handleBookNow(selectedPackage, 'package');
+                    setSelectedPackage(null);
+                  }}
+                  className="w-full sm:w-auto px-6 py-2 md:py-2.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors text-sm md:text-base"
+                >
                   Book Now
                 </button>
               </div>
             </div>
           </div>
         )}
+
+        {/* Book Test Modal */}
+        <BookTestModal 
+          isOpen={isBookModalOpen} 
+          onClose={() => {
+            setIsBookModalOpen(false);
+            setSelectedItemForBooking(null);
+          }}
+          preSelectedTest={selectedItemForBooking}
+        />
       </main>
+      <WhatsAppButton/>
       <Footer />
     </div>
   );
