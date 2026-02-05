@@ -18,6 +18,7 @@ const footerLinks = {
     { name: 'About us', path: '/about' },
     { name: 'Services', path: '/services' },
     { name: 'Test Catalogue', path: '/tests' },
+    { name: 'Franchise', path: '/franchise' },
     { name: 'Contact us', path: '/contact' },
     { name: 'Become Partner', path: 'tel:+91 62008 37385' },
   ],

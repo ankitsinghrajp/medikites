@@ -11,6 +11,7 @@ import ServicesSection from '@/components/home/ServicesSection';
 import { HowItWorksSection } from '@/components/home/HowItWorksSection';
 import { TestimonialsSection } from '@/components/home/TestimonialsSection';
 import SEO from '@/seo/SEO';
+import MediaCoverage from '@/components/mediaCoverage';
 
 const Index = () => {
   return (
@@ -25,6 +26,7 @@ const Index = () => {
       <Header />
       <main>
         <HeroSection />
+        <MediaCoverage/>
         <ServicesSection/>
         <TestCategoriesSection />
         <LabPartnersSection/>
