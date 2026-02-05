@@ -16,8 +16,10 @@ const footerLinks = {
   company: [
     { name: 'Home', path: '/' },
     { name: 'About us', path: '/about' },
+    { name: 'Services', path: '/services' },
     { name: 'Test Catalogue', path: '/tests' },
     { name: 'Contact us', path: '/contact' },
+    { name: 'Become Partner', path: 'tel:+91 62008 37385' },
   ],
 };
 
@@ -64,14 +66,25 @@ export const Footer = () => {
                 <span className="font-medium text-sm md:text-base">+91 620 083 7385</span>
               </motion.a>
               <motion.a 
-                href="mailto:info.medikites@gmail.com" 
+                href="mailto:support@medikites.in" 
                 whileHover={{ x: 5 }}
                 className="flex items-center gap-3 text-gray-700 hover:text-gray-900 transition-all duration-200 group"
               >
                 <div className="w-10 h-10 rounded-lg bg-white/80 border border-gray-200 flex items-center justify-center group-hover:bg-white transition-colors shadow-sm">
                   <Mail className="w-5 h-5 text-gray-700" />
                 </div>
-                <span className="font-medium text-sm md:text-base">info.medikites@gmail.com</span>
+                <span className="font-medium text-sm md:text-base">support@medikites.in</span>
+              </motion.a>
+
+              <motion.a 
+                href="mailto:info@medikites.in" 
+                whileHover={{ x: 5 }}
+                className="flex items-center gap-3 text-gray-700 hover:text-gray-900 transition-all duration-200 group"
+              >
+                <div className="w-10 h-10 rounded-lg bg-white/80 border border-gray-200 flex items-center justify-center group-hover:bg-white transition-colors shadow-sm">
+                  <Mail className="w-5 h-5 text-gray-700" />
+                </div>
+                <span className="font-medium text-sm md:text-base">info@medikites.in</span>
               </motion.a>
               <motion.div 
                 whileHover={{ x: 5 }}

@@ -6,7 +6,7 @@ import { LocationsSection } from '@/components/home/LocationsSection';
 import { CTASection } from '@/components/home/CTASection';
 import { LabPartnersSection } from '@/components/home/LabPartnerSection';
 import { WhyChooseSection } from '@/components/home/WhyChooseSection';
-import { WhatsAppButton } from '@/components/home/WhatsAppButton';
+
 import ServicesSection from '@/components/home/ServicesSection';
 import { HowItWorksSection } from '@/components/home/HowItWorksSection';
 import { TestimonialsSection } from '@/components/home/TestimonialsSection';
