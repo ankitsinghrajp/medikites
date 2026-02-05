@@ -132,20 +132,7 @@ export const HeroSection = () => {
               transition={{ delay: 0.4 }}
               className="flex flex-col sm:flex-row items-center gap-3 justify-center mb-10"
             >
-            
-              <motion.a 
-                href="https://wa.me/916200837385"
-                className="w-full sm:w-auto"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button 
-                  className="w-full bg-[#25D366] hover:bg-[#20BA5A] text-white px-8 py-6 rounded-full text-base font-semibold transition-all duration-300 gap-2 shadow-lg hover:shadow-xl"
-                >
-                  <MessageCircle className="w-5 h-5" />
-                  WhatsApp
-                </Button>
-              </motion.a>
+    
 
               <motion.a 
                 href="tel:+916200837385"
