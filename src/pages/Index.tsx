@@ -10,10 +10,18 @@ import { WhyChooseSection } from '@/components/home/WhyChooseSection';
 import ServicesSection from '@/components/home/ServicesSection';
 import { HowItWorksSection } from '@/components/home/HowItWorksSection';
 import { TestimonialsSection } from '@/components/home/TestimonialsSection';
+import SEO from '@/seo/SEO';
 
 const Index = () => {
   return (
     <div className="min-h-screen">
+       <SEO
+        title="Medikites – Diagnostic Lab & Home Healthcare Services in India | Book Tests at Home"
+        description="Medikites offers trusted diagnostic lab tests at home, home healthcare services, ICU setup at home, medical equipment rental, and on-call medical services across India. Book blood tests and healthcare services online."
+        keywords="diagnostic lab in india, lab tests at home, blood test at home, home healthcare services, ICU setup at home, medical equipment rental, pathology lab near me, diagnostic services india, healthcare services at home, book lab test online"
+        canonical="https://medikites.in/"
+        image="https://medikites.in/og-image.jpg"
+      />
       <Header />
       <main>
         <HeroSection />

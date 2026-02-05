@@ -31,6 +31,7 @@ import BookTestModal from '@/components/home/BookNowModal';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/home/WhatsAppButton';
+import SEO from '@/seo/SEO';
 
 const services = {
   homeHealthcare: {
@@ -346,6 +347,14 @@ export const ServicesPage = () => {
 
   return (
     <>
+       <SEO
+        title="Healthcare Services at Home in India | Nursing, ICU, Lab Tests – Medikites"
+        description="Explore Medikites healthcare services including home nursing, ICU setup at home, lab tests at home, diagnostic services, medical equipment rental, X-ray, ECG, and on-call medical services across India."
+        keywords="healthcare services at home, home nursing services, ICU setup at home india, lab tests at home india, diagnostic services india, medical equipment rental india, xray at home, ECG at home, home medical services india, on call doctor services"
+        canonical="https://medikites.in/services"
+        image="https://medikites.in/og-image.jpg"
+      />
+
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         <Header/>
         

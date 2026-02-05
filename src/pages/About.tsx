@@ -18,6 +18,7 @@ import { CertificationsSection } from '@/components/about/CertificationSection';
 import { ExpertTeamSection } from '@/components/about/ExpertTeamSection';
 import { CTASection } from '@/components/home/CTASection';
 import { WhatsAppButton } from '@/components/home/WhatsAppButton';
+import SEO from '@/seo/SEO';
 
 const stats = [
   { value: '10+', label: 'Years of Excellence' },
@@ -59,6 +60,13 @@ const team = [
 const About = () => {
   return (
     <div className="min-h-screen">
+       <SEO
+        title="About Medikites – Trusted Diagnostic & Home Healthcare Services in India"
+        description="Learn about Medikites, a trusted healthcare and diagnostic service provider offering lab tests at home, home nursing, ICU setup, and medical equipment rental across India. Our mission is to deliver quality healthcare at your doorstep."
+        keywords="about medikites, healthcare services india, diagnostic lab services, home healthcare company india, lab test at home india, nursing services at home, medical services provider india"
+        canonical="https://medikites.in/about"
+        image="https://medikites.in/og-image.jpg"
+      />
       <Header />
       <main>
        

@@ -9,6 +9,7 @@ import TestCatalogueHero from '@/components/TestCatalogue/TestCatalogueHero';
 import { tests as testsData, packages as packagesData, categories as categoriesData, popularTests } from '@/data/data';
 import { WhatsAppButton } from '@/components/home/WhatsAppButton';
 import BookTestModal from '@/components/home/BookNowModal';
+import SEO from '@/seo/SEO';
 
 // Transform categories data to include counts
 const getAllCategories = () => {
@@ -205,6 +206,13 @@ const Tests = () => {
 
   return (
     <div className="min-h-screen">
+         <SEO
+        title="Lab Tests at Home in India | Blood Test, CBC, Thyroid, Diabetes – Medikites"
+        description="Book lab tests at home with Medikites. We offer blood tests, CBC, thyroid test, diabetes test, dengue test, pregnancy test, vitamin test and 300+ diagnostic tests with home sample collection across India."
+        keywords="lab tests at home, blood test at home india, CBC test price, thyroid test at home, diabetes test, dengue test, covid test at home, vitamin test, pathology lab near me, home sample collection india"
+        canonical="https://medikites.in/tests"
+        image="https://medikites.in/og-image.jpg"
+      />
       <Header />
       <main>
         {/* Hero Section */}

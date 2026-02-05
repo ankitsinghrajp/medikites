@@ -18,6 +18,7 @@ import OperatingHoursEnhanced from '@/components/Contacts/OperatingHours';
 import ContactForm from '@/components/Contacts/ContactForm';
 import { WhatsAppButton } from '@/components/home/WhatsAppButton';
 import PartnerWithUs from '@/components/Contacts/PartnerWithUs';
+import SEO from '@/seo/SEO';
 
 const contactMethods = [
   {
@@ -64,6 +65,13 @@ const labLocations = [
 const Contact = () => {
   return (
     <div className="min-h-screen">
+       <SEO
+        title="Contact Medikites | Book Lab Tests & Home Healthcare Services in India"
+        description="Contact Medikites to book lab tests at home, diagnostic services, home nursing, ICU setup, and medical equipment rental. Call us or book healthcare services online across India."
+        keywords="contact medikites, book lab test at home, contact diagnostic lab, home healthcare contact india, pathology lab contact, medical services booking india"
+        canonical="https://medikites.in/contact"
+        image="https://medikites.in/og-image.jpg"
+      />
       <Header />
       <main>
        <ContactHero/>
