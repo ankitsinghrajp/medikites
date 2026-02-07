@@ -12,7 +12,8 @@ const mediaCoverage = [
     logo: TPTV,
     url: 'https://tptv.in/medikites-revolutionising-home-healthcare-throughout-india',
     alt: 'Featured on TPTV News',
-    fallbackText: 'TPTV'
+    fallbackText: 'TPTV',
+    accentColor: 'from-blue-500 to-cyan-500'
   },
   {
     id: 2,
@@ -20,15 +21,17 @@ const mediaCoverage = [
     logo: HindustanBytes,
     url: 'https://www.hindustanbytes.com/medikites-revolutionising-home-healthcare-throughout-india',
     alt: 'Featured in Hindustan Bytes',
-    fallbackText: 'Hindustan Bytes'
+    fallbackText: 'Hindustan Bytes',
+    accentColor: 'from-orange-500 to-red-500'
   },
   {
     id: 3,
     name: 'Entrepreneur Hunt',
-    logo: EntrepreneurHunt ,
+    logo: EntrepreneurHunt,
     url: 'https://entrepreneurhunt.com/tag/medikites',
     alt: 'Featured in Entrepreneur Hunt',
-    fallbackText: 'Entrepreneur Hunt'
+    fallbackText: 'Entrepreneur Hunt',
+    accentColor: 'from-purple-500 to-pink-500'
   },
   {
     id: 4,
@@ -36,7 +39,8 @@ const mediaCoverage = [
     logo: PunjabBytes,
     url: 'https://english.punjabbytes.com/tag/medikites',
     alt: 'Featured in Punjab Bytes',
-    fallbackText: 'Punjab Bytes'
+    fallbackText: 'Punjab Bytes',
+    accentColor: 'from-green-500 to-emerald-500'
   },
   {
     id: 5,
@@ -44,7 +48,8 @@ const mediaCoverage = [
     logo: TheDailyBeat,
     url: 'https://thedailybeat.in/tag/medikites',
     alt: 'Featured in The Daily Beat',
-    fallbackText: 'The Daily Beat'
+    fallbackText: 'The Daily Beat',
+    accentColor: 'from-indigo-500 to-blue-500'
   }
 ];
 
@@ -56,34 +61,43 @@ const MediaCoverage = () => {
   const infiniteLogos = [...mediaCoverage, ...mediaCoverage, ...mediaCoverage];
 
   return (
-    <section className="relative bg-white border-y border-gray-100 overflow-hidden">
-      <div className="py-8 lg:py-10">
+    <section className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50 border-y border-slate-200 overflow-hidden">
+      
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.02]">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, rgb(148 163 184) 1px, transparent 0)`,
+          backgroundSize: '32px 32px'
+        }} />
+      </div>
+
+      <div className="relative pt-12 lg:py-16">
         <div className="max-w-7xl mx-auto px-4">
           
           {/* ===== HEADING ===== */}
-          <div className="text-center mb-8">
-            <h2 className="text-xs lg:text-sm font-bold text-gray-500 uppercase tracking-[0.15em] mb-1">
-              As Seen In
-            </h2>
-            <div className="flex items-center justify-center gap-2">
-              <div className="h-px w-8 bg-gradient-to-r from-transparent to-gray-300" />
-              <svg className="w-4 h-4 text-cyan-500" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-              <div className="h-px w-8 bg-gradient-to-l from-transparent to-gray-300" />
+          <div className="text-center mb-12 lg:mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-gradient-to-r from-cyan-50 to-blue-50 rounded-full border border-cyan-100 mb-4">
+              <div className="w-2 h-2 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full animate-pulse" />
+              <span className="text-xs lg:text-sm font-semibold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent uppercase tracking-wider">
+                Media Coverage
+              </span>
             </div>
+              
+            <p className="text-sm lg:text-base text-slate-600 max-w-2xl mx-auto">
+              Recognized by India's top media outlets for revolutionizing home healthcare
+            </p>
           </div>
 
           {/* ===== LOGO SLIDER ===== */}
           <div className="relative slider-wrapper">
             
             {/* Edge Fade Gradients */}
-            <div className="absolute left-0 top-0 bottom-0 w-20 lg:w-40 bg-gradient-to-r from-white via-white/95 to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-20 lg:w-40 bg-gradient-to-l from-white via-white/95 to-transparent z-10 pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-24 lg:w-48 bg-gradient-to-r from-white via-white/90 to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-24 lg:w-48 bg-gradient-to-l from-white via-white/90 to-transparent z-10 pointer-events-none" />
 
             {/* Scrolling Container */}
-            <div className="overflow-hidden">
-              <div className="logo-track inline-flex gap-8 lg:gap-16">
+            <div className="overflow-hidden py-4">
+              <div className="logo-track inline-flex gap-6 lg:gap-8">
                 {infiniteLogos.map((media, index) => (
                   <LogoCard key={`${media.id}-${index}`} media={media} />
                 ))}
@@ -91,12 +105,6 @@ const MediaCoverage = () => {
             </div>
           </div>
 
-          {/* ===== TRUST CAPTION ===== */}
-          <div className="text-center mt-6">
-            <p className="text-xs text-gray-400 font-medium">
-              Trusted healthcare innovation featured across leading Indian media
-            </p>
-          </div>
         </div>
       </div>
 
@@ -113,7 +121,7 @@ const MediaCoverage = () => {
         }
 
         .logo-track {
-          animation: slideLeft 50s linear infinite;
+          animation: slideLeft 45s linear infinite;
           will-change: transform;
         }
 
@@ -125,7 +133,7 @@ const MediaCoverage = () => {
         /* Mobile: Faster scroll */
         @media (max-width: 768px) {
           .logo-track {
-            animation-duration: 35s;
+            animation-duration: 30s;
           }
         }
 
@@ -133,6 +141,7 @@ const MediaCoverage = () => {
         .logo-track {
           backface-visibility: hidden;
           -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
         }
       `}</style>
     </section>
@@ -150,49 +159,53 @@ const LogoCard = ({ media }) => {
       href={media.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex-shrink-0 group block"
+      className="flex-shrink-0 group block transform transition-all duration-300 hover:-translate-y-1"
       aria-label={`Read ${media.name} article about Medikites`}
     >
-      <div className="relative h-14 lg:h-16 w-32 lg:w-44 flex items-center justify-center">
+      <div className="relative h-20 lg:h-24 w-40 lg:w-52">
         
-        {/* Card Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white rounded-xl border border-gray-200 group-hover:border-cyan-300 group-hover:shadow-md transition-all duration-300" />
+        {/* Card Background with Gradient Border Effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white to-slate-50 rounded-2xl shadow-sm group-hover:shadow-xl transition-all duration-300 border border-slate-200 group-hover:border-transparent" />
+        
+        {/* Animated Gradient Border on Hover */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${media.accentColor} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-[1px]`}>
+          <div className="w-full h-full bg-white rounded-2xl" />
+        </div>
         
         {/* Content */}
-        <div className="relative z-10 px-4 py-2 flex items-center justify-center w-full h-full">
+        <div className="relative z-10 px-6 py-4 flex items-center justify-center w-full h-full">
           
           {/* Show logo image if available and loaded */}
           {!imageError ? (
             <img
               src={media.logo}
               alt={media.alt}
-              className="h-8 lg:h-10 w-auto max-w-full object-contain filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+              className="h-10 lg:h-12 w-auto max-w-full object-contain transition-all duration-300 group-hover:scale-110"
               onError={() => setImageError(true)}
               loading="lazy"
             />
           ) : (
             // Fallback text when image fails to load
             <div className="text-center">
-              <p className="text-[10px] lg:text-xs font-bold text-gray-400 group-hover:text-gray-700 leading-tight transition-colors duration-300">
+              <p className="text-xs lg:text-sm font-bold text-slate-700 group-hover:text-slate-900 leading-tight transition-colors duration-300">
                 {media.fallbackText}
               </p>
             </div>
           )}
         </div>
 
-        {/* Hover Glow Effect */}
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 via-emerald-500/0 to-blue-500/0 group-hover:from-cyan-500/5 group-hover:via-emerald-500/5 group-hover:to-blue-500/5 rounded-xl transition-all duration-300 pointer-events-none" />
+        {/* Subtle Shine Effect on Hover */}
+        <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
+          <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12" />
+        </div>
         
-        {/* Corner Accent (subtle premium touch) */}
-        <div className="absolute top-0 right-0 w-6 h-6 bg-gradient-to-br from-cyan-400/0 to-transparent group-hover:from-cyan-400/20 rounded-xl transition-all duration-300" />
+        {/* Corner Accent Dot */}
+        <div className={`absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-br ${media.accentColor} rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg`}>
+          <div className="w-full h-full rounded-full bg-gradient-to-br from-white/40 to-transparent" />
+        </div>
       </div>
     </a>
   );
 };
 
 export default MediaCoverage;
-
-
-
-
-
