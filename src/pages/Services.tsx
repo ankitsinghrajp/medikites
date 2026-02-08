@@ -25,7 +25,10 @@ import {
   Zap,
   ChevronRight,
   Sparkles,
-  Star
+  Star,
+  Video,
+  ShoppingBag,
+  Briefcase
 } from 'lucide-react';
 import BookTestModal from '@/components/home/BookNowModal';
 import { Header } from '@/components/Header';
@@ -68,6 +71,45 @@ const services = {
         slug: 'icu-setup-at-home',
         icon: BedDouble, 
         description: 'Hospital-grade ICU' 
+      }
+    ]
+  },
+   telemedicine: {
+    title: 'Telemedicine',
+    icon: Video,
+    color: 'from-indigo-500 to-purple-500',
+    services: [
+      { 
+        name: 'Online Video Consultation', 
+        slug: 'online-video-consultation',
+        icon: Video, 
+        description: 'Always accessible' 
+      }
+    ]
+  },
+  pharmacy: {
+    title: 'Pharmacy',
+    icon: ShoppingBag,
+    color: 'from-green-500 to-emerald-500',
+    services: [
+      { 
+        name: 'Pharmacy', 
+        slug: 'pharmacy',
+        icon: ShoppingBag, 
+        description: 'Instant meds solutions' 
+      }
+    ]
+  },
+  corporateHealth: {
+    title: 'Corporate Health',
+    icon: Briefcase,
+    color: 'from-amber-500 to-orange-500',
+    services: [
+      { 
+        name: 'Corporate Wellness', 
+        slug: 'corporate-wellness',
+        icon: Briefcase, 
+        description: 'Healthy workforce' 
       }
     ]
   },
@@ -218,7 +260,8 @@ const services = {
         description: 'Comfort devices' 
       }
     ]
-  }
+  },
+ 
 };
 
 const stats = [

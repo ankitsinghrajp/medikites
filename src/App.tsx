@@ -12,6 +12,10 @@ import ScrollToTop from "./components/ScrollToTop";
 import ServicesPage from "./pages/Services";
 import { ServicePage } from "./pages/ServicesSlug";
 import FranchisePage from "./pages/Franchise";
+import { SurgeryPage } from "./pages/Surgery";
+import { MedicineDeliveryPage } from "./pages/MedicineDelivery";
+import { JobsPage } from "./pages/Job";
+import { MedicalEquipmentPage } from "./pages/MedicalEquipmentPage";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +34,10 @@ const App = () => (
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/services/:slug" element={<ServicePage />} />
           <Route path="/franchise" element={<FranchisePage />} />
+          <Route path="/services/surgery" element={<SurgeryPage />} />
+          <Route path="/services/medicine-delivery" element={<MedicineDeliveryPage />} />
+          <Route path="/jobs" element={<JobsPage />} />
+          <Route path="/services/medical-equipments" element={<MedicalEquipmentPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -90,10 +90,6 @@ const MediaCoverage = () => {
 
           {/* ===== LOGO SLIDER ===== */}
           <div className="relative slider-wrapper">
-            
-            {/* Edge Fade Gradients */}
-            <div className="absolute left-0 top-0 bottom-0 w-24 lg:w-48 bg-gradient-to-r from-white via-white/90 to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-24 lg:w-48 bg-gradient-to-l from-white via-white/90 to-transparent z-10 pointer-events-none" />
 
             {/* Scrolling Container */}
             <div className="overflow-hidden py-4">
@@ -120,21 +116,22 @@ const MediaCoverage = () => {
           }
         }
 
+        /* Mobile First: Faster scroll */
         .logo-track {
-          animation: slideLeft 45s linear infinite;
+          animation: slideLeft 30s linear infinite;
           will-change: transform;
+        }
+
+        /* Desktop: Slower scroll */
+        @media (min-width: 768px) {
+          .logo-track {
+            animation-duration: 45s;
+          }
         }
 
         /* Pause on hover */
         .slider-wrapper:hover .logo-track {
           animation-play-state: paused;
-        }
-
-        /* Mobile: Faster scroll */
-        @media (max-width: 768px) {
-          .logo-track {
-            animation-duration: 30s;
-          }
         }
 
         /* Smooth rendering */

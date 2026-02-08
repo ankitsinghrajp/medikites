@@ -14,6 +14,9 @@ import {
   Clock,
   Scan,
   HeartPulse,
+  Video,
+  ShoppingBag,
+  Briefcase,
 } from "lucide-react";
 
 export const servicesData = {
@@ -1588,6 +1591,202 @@ export const servicesData = {
         name: "Rekha Pillai",
         location: "Kerala",
         review: "Suction machine rental was essential for my husband's care. Equipment quality is good and support team is always helpful."
+      },
+    ],
+  },
+
+  /* ================= TELEMEDICINE ================= */
+
+  "online-video-consultation": {
+    name: "Online 24/7 Video Consultation",
+    subtitle: "Always Accessible",
+    icon: Video,
+    quickFeatures: ["24/7 Available", "Instant Connect", "Expert Doctors", "Convenient"],
+    overview: {
+      what:
+        "Connect with qualified doctors instantly through video consultation from the comfort of your home, available 24/7 for all your healthcare needs.",
+      whoShouldOpt: [
+        "Patients needing quick medical advice",
+        "Follow-up consultations",
+        "Non-emergency health concerns",
+        "Prescription renewals",
+        "Second opinion seekers",
+      ],
+    },
+    included: [
+      "24/7 doctor availability",
+      "Video consultation",
+      "Digital prescription",
+      "Medical advice",
+      "Follow-up support",
+      "Health record maintenance",
+    ],
+    howItWorks: [
+      { step: 1, title: "Book Consultation", description: "Select specialty & time" },
+      { step: 2, title: "Connect with Doctor", description: "Video call with expert" },
+      { step: 3, title: "Get Diagnosis", description: "Medical advice & prescription" },
+      { step: 4, title: "Follow-up", description: "Track health & medications" },
+    ],
+    pricing: { startingFrom: "₹299", note: "Consultation fee varies by specialist" },
+    faqs: [
+      {
+        question: "Is video consultation as effective as in-person?",
+        answer: "Yes, for most non-emergency conditions, video consultation is highly effective. Doctors can diagnose and prescribe medications remotely."
+      },
+      {
+        question: "Can I get a prescription through video consultation?",
+        answer: "Absolutely! After consultation, doctors provide digital prescriptions that are valid at all pharmacies."
+      },
+      {
+        question: "What if I need physical examination?",
+        answer: "If the doctor determines physical examination is necessary, they'll recommend an in-person visit to a clinic or hospital."
+      },
+      {
+        question: "Are the doctors qualified?",
+        answer: "Yes, all our doctors are licensed medical professionals with verified credentials and extensive experience."
+      },
+    ],
+    testimonials: [
+      {
+        name: "Rahul Verma",
+        location: "Mumbai",
+        review: "Super convenient! Got consultation for fever at midnight. Doctor was professional and prescribed medicines immediately."
+      },
+      {
+        name: "Sneha Patel",
+        location: "Bangalore",
+        review: "Video consultation saved me a trip to the hospital. Doctor was attentive and the digital prescription worked perfectly."
+      },
+    ],
+  },
+
+  /* ================= PHARMACY ================= */
+
+  "pharmacy": {
+    name: "Pharmacy",
+    subtitle: "Instant Meds Solutions",
+    icon: ShoppingBag,
+    quickFeatures: ["Home Delivery", "Verified Medicines", "Prescription Upload", "Affordable"],
+    overview: {
+      what:
+        "Order medicines online with prescription and get them delivered to your doorstep. Genuine medicines from verified pharmacies at best prices.",
+      whoShouldOpt: [
+        "Patients needing regular medications",
+        "Chronic disease patients",
+        "Busy professionals",
+        "Elderly unable to visit pharmacies",
+        "Anyone seeking convenience",
+      ],
+    },
+    included: [
+      "Prescription medicine delivery",
+      "OTC medicines and health products",
+      "Verified and genuine medicines",
+      "Medicine reminders",
+      "Refill notifications",
+      "Easy prescription upload",
+    ],
+    howItWorks: [
+      { step: 1, title: "Upload Prescription", description: "Share prescription online" },
+      { step: 2, title: "Verify & Confirm", description: "Pharmacist verifies order" },
+      { step: 3, title: "Processing", description: "Medicines packed securely" },
+      { step: 4, title: "Home Delivery", description: "Delivered to your doorstep" },
+    ],
+    pricing: { startingFrom: "Free Delivery", note: "On orders above ₹500" },
+    faqs: [
+      {
+        question: "Do I need a prescription to order medicines?",
+        answer: "Yes, prescription medicines require a valid prescription. OTC medicines can be ordered without prescription."
+      },
+      {
+        question: "How long does delivery take?",
+        answer: "Typically 24-48 hours depending on your location. Express delivery available in select cities."
+      },
+      {
+        question: "Are the medicines genuine?",
+        answer: "Yes, we source all medicines from verified and licensed distributors. All products are genuine with proper batch numbers."
+      },
+      {
+        question: "Can I return medicines if needed?",
+        answer: "Yes, medicines can be returned if unopened and unused within 7 days, as per our return policy."
+      },
+    ],
+    testimonials: [
+      {
+        name: "Arun Kumar",
+        location: "Chennai",
+        review: "Very convenient medicine delivery service. All medicines were genuine and delivered on time. Great prices too!"
+      },
+      {
+        name: "Priya Iyer",
+        location: "Pune",
+        review: "Ordering my father's monthly medicines is now so easy. The reminder feature ensures we never run out of stock."
+      },
+    ],
+  },
+
+  /* ================= CORPORATE HEALTH ================= */
+
+  "corporate-wellness": {
+    name: "Corporate Wellness",
+    subtitle: "Healthy Workforce",
+    icon: Briefcase,
+    quickFeatures: ["Employee Health", "Preventive Care", "On-site Checkups", "Wellness Programs"],
+    overview: {
+      what:
+        "Comprehensive corporate wellness programs including health checkups, preventive screenings, and wellness initiatives to keep your workforce healthy and productive.",
+      whoShouldOpt: [
+        "Companies wanting employee health programs",
+        "Organizations prioritizing preventive care",
+        "Businesses seeking productivity improvement",
+        "Startups to large enterprises",
+      ],
+    },
+    included: [
+      "Annual health checkups for employees",
+      "On-site health screening camps",
+      "Vaccination drives",
+      "Health talks and workshops",
+      "Mental wellness programs",
+      "Fitness challenges",
+      "Customized wellness plans",
+      "Health data analytics",
+    ],
+    howItWorks: [
+      { step: 1, title: "Consultation", description: "Understand company needs" },
+      { step: 2, title: "Custom Plan", description: "Design wellness program" },
+      { step: 3, title: "Implementation", description: "On-site health camps" },
+      { step: 4, title: "Monitoring", description: "Track health outcomes" },
+    ],
+    pricing: { startingFrom: "₹499/employee", note: "Custom packages based on company size" },
+    faqs: [
+      {
+        question: "What size companies do you work with?",
+        answer: "We work with companies of all sizes - from startups with 10 employees to large enterprises with 10,000+ employees."
+      },
+      {
+        question: "Can you customize the wellness program?",
+        answer: "Absolutely! We design wellness programs based on your industry, workforce demographics, and specific health goals."
+      },
+      {
+        question: "Do you provide on-site health checkups?",
+        answer: "Yes, we conduct health screening camps at your office premises with all necessary equipment and medical staff."
+      },
+      {
+        question: "How does this benefit the company?",
+        answer: "Corporate wellness reduces absenteeism, improves productivity, boosts employee morale, and reduces healthcare costs long-term."
+      },
+    ],
+    testimonials: [
+      {
+        name: "Rajesh Malhotra (HR Head)",
+        location: "Gurgaon",
+        review: "Excellent corporate wellness program! Employee participation was high and the health screening helped many employees detect issues early."
+      },
+      {
+        name: "Kavita Deshmukh (CEO)",
+        location: "Mumbai",
+        review: "Our company's productivity improved significantly after implementing this wellness program. Employees feel valued and healthier!"
       },
     ],
   },
